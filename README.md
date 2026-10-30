@@ -135,11 +135,29 @@ when you want to configure a profile without activating it.
 
 ## Cloud updates and command acknowledgement
 
-All devices on the same installation share one automatic poll every **five
-minutes**. There is no manual Refresh button. Commands trigger follow-up reads.
+All devices on the same account and installation share one automatic poll.
+In the app's **Configure** page, choose a refresh interval of **5–60 minutes**
+for all Frisquet devices. Upgrades preserve the existing five-minute interval;
+new installations default to fifteen minutes. Saved changes apply immediately
+and survive restarts. There is no manual Refresh button. Commands trigger follow-up reads.
 Failures back off; authentication expiry triggers at most one renewal/retry per
 request. Transport errors on writes are not automatically replayed, because the
 server might have received the command before the response was lost.
+
+The same page has two optional notification settings, both off by default:
+
+- **Connection failure and recovery:** notify after updates have failed for
+  a configurable **5–120 minutes** (30 by default), then once when updates resume.
+  This describes access to Frisquet readings, not whether the boiler is running.
+- **New boiler and service alarms:** notify when a previously unseen alarm appears
+  in a successful response. Alarms already observed while notifications were off
+  are not replayed on enabling them. An unchanged alarm is not repeated, including
+  after a restart; a cleared alarm can notify again if it returns.
+
+Combined and legacy zone devices sharing an installation connection do not create
+duplicate notifications. Homey handles notification delivery; phone delivery
+depends on your Homey notification settings. Alarm detection follows the refresh
+interval. Failed refreshes back off, independently of the connection warning timer.
 
 **Last command** is shared across the installation:
 

@@ -7,6 +7,16 @@
     <script src="settings.js" defer></script>
     <style>
       body { padding: 16px; }
+      form { max-width: 560px; }
+      fieldset { border: 0; padding: 0; margin: 0 0 24px; }
+      legend { font-size: 1.15em; font-weight: 600; margin-bottom: 12px; }
+      .field { margin-bottom: 20px; }
+      .field > label { display: block; margin-bottom: 8px; }
+      input[type="number"] { box-sizing: border-box; width: 100%; max-width: 160px; padding: 10px; font: inherit; }
+      input[type="checkbox"] { margin-right: 8px; }
+      .hint { font-size: 0.9em; line-height: 1.5; margin: 8px 0; }
+      #preferences-status { min-height: 1.5em; }
+      #support { border-top: 1px solid #8885; padding-top: 20px; }
       button, a { margin: 4px 8px 12px 0; }
       textarea { box-sizing: border-box; width: 100%; min-height: 240px; font: 12px/1.5 monospace; }
       #status { min-height: 1.5em; }
@@ -16,7 +26,33 @@
     </style>
   </head>
   <body>
-    <h1 data-i18n="support.title">Support report</h1>
+    <h1 data-i18n="preferences.title">Frisquet Connect settings</h1>
+    <p data-i18n="preferences.intro">These settings apply to all Frisquet devices on this Homey.</p>
+    <form id="preferences">
+      <fieldset id="preferences-fields" disabled>
+        <legend data-i18n="preferences.updates">Automatic updates</legend>
+        <div class="field">
+          <label for="poll-minutes" data-i18n="preferences.poll">Refresh interval (minutes)</label>
+          <input id="poll-minutes" name="pollMinutes" type="number" min="5" max="60" step="1" required inputmode="numeric" aria-describedby="poll-help">
+          <p id="poll-help" class="hint" data-i18n="preferences.poll_help">Choose 5–60 minutes. Commands are checked sooner; failed requests retry with increasing delays.</p>
+        </div>
+        <div class="field">
+          <label for="connection-notifications"><input id="connection-notifications" type="checkbox"><span data-i18n="preferences.connection">Connection failure and recovery notifications</span></label>
+          <p class="hint" data-i18n="preferences.connection_help">Notify once when readings cannot be refreshed for the chosen delay, then once when updates resume.</p>
+          <label for="connection-delay" data-i18n="preferences.delay">Notify after (minutes)</label>
+          <input id="connection-delay" name="connectionDelayMinutes" type="number" min="5" max="120" step="1" required inputmode="numeric" disabled>
+        </div>
+        <div class="field">
+          <label for="alarm-notifications"><input id="alarm-notifications" type="checkbox"><span data-i18n="preferences.alarms">New boiler and service alarm notifications</span></label>
+          <p class="hint" data-i18n="preferences.alarms_help">Notify when a new alarm appears in a Frisquet response. An unchanged alarm is not repeated. A cleared alarm can notify again if it returns.</p>
+        </div>
+        <p class="hint" data-i18n="preferences.notification_help">Notifications use Homey’s notification system. Delivery to your phone depends on your Homey notification settings.</p>
+        <button id="save-preferences" type="submit" class="homey-button-primary" data-i18n="preferences.save">Save settings</button>
+      </fieldset>
+      <p id="preferences-status" role="status" aria-live="polite"></p>
+    </form>
+    <section id="support">
+    <h2 data-i18n="support.title">Support report</h2>
     <p data-i18n="support.intro">After reproducing the problem, use Homey’s Create Diagnostics Report to send recent app logs directly to the developer.</p>
     <p data-i18n="support.mobile">Mobile: More → Apps → Frisquet Connect → settings gear → Create Diagnostics Report.</p>
     <p data-i18n="support.web">Web: Settings → Frisquet Connect → Create Diagnostics Report.</p>
@@ -38,5 +74,6 @@
       </section>
       <button id="clear" class="homey-button-secondary" data-i18n="support.clear">Clear local history</button>
     </details>
+    </section>
   </body>
 </html>

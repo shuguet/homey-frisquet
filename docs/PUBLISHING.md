@@ -1,6 +1,6 @@
 # Publishing Frisquet Connect
 
-The release candidate is **0.5.1**, with app ID `community.frisquet.connect`.
+The release candidate is **0.6.0**, with app ID `community.frisquet.connect`.
 The ID and driver IDs remain unchanged so existing devices and Flows can upgrade.
 
 Publisher: Sylvain Huguet. Source and support:
@@ -23,8 +23,10 @@ CLI 4.6.2. The checks do not send heating commands or require Frisquet credentia
 dimensions, project links, permissions and the main device controls. CLI validation
 checks Homey's schema and package rules; it does not replace Athom's review.
 
-Install a candidate on a test Homey with `homey app install`. Do not use `--clean`
-on an existing installation. Confirm pairing and Repair, both mode pickers,
+Install candidates from the store's Test channel to retain Homey's native
+diagnostic report button. For development on a separate test Homey, use
+`homey app install`; this changes the installation origin and hides that button.
+Do not use `--clean` on an existing installation. Confirm pairing and Repair, both mode pickers,
 profile temperature controls, Boost, automatic updates, Flows and reconnection
 after restarting the app. Verify phone rendering in English and French. On
 installations with several zones, verify each zone separately. Use the official
@@ -33,7 +35,7 @@ Frisquet app to compare state and restore any settings changed during testing.
 ## Upload and certification
 
 1. Sign in using `homey login`, then run `homey app publish` in the project root.
-   Keep version 0.5.1 for the first upload of this candidate. English and French
+   Keep version 0.6.0 for the first upload of this candidate. English and French
    release notes are already in `.homeychangelog.json`.
 2. Open [Homey Developer Tools](https://tools.developer.homey.app), choose
    **Apps SDK → My Apps → Frisquet Connect**, and open the uploaded Draft.
@@ -74,8 +76,11 @@ integrations, credited in the manifest, LICENSE and THIRD_PARTY_NOTICES.md.
 
 One paired device includes heating zones, hot water, equipment information and
 alarms. Temperature controls edit stored profile temperatures; schedules and
-holidays remain managed in the official app. Polling is shared per installation
-at five-minute intervals, with command follow-up reads and failure backoff.
+holidays remain managed in the official app. Polling is shared per account and
+installation, configurable app-wide from 5 to 60 minutes, with command follow-up
+reads and failure backoff. Upgrades retain five minutes; fresh installations
+default to fifteen. Optional connection/recovery and new alarm notifications
+are off by default and retain deduplication state across restarts.
 
 No Homey permissions or runtime npm dependencies are requested. Room temperature
 can be selected in the device's status-indicator settings. Boost is the quick

@@ -113,3 +113,36 @@ test('disconnect cancels timers and prevents queued commands from sending', asyn
   assert.equal(h.orders.length, 0);
   assert.equal(h.timers.size, 0);
 });
+
+test('poll interval changes reschedule from the last successful read without adding requests', async () => {
+  const h = harness();
+  await h.connection.refresh();
+  h.advance(60000);
+  h.connection.setPollInterval(900000);
+  assert.equal(h.timers.size, 1);
+  assert.equal([...h.timers.values()][0].delay, 840000);
+  assert.equal(h.reads, 1);
+  h.advance(600000);
+  h.connection.setPollInterval(300000);
+  assert.equal([...h.timers.values()][0].delay, 0);
+  h.connection.stop();
+  h.connection.setPollInterval(600000);
+  assert.equal(h.timers.size, 0);
+});
+
+test('poll interval changes preserve command checks and current failure backoff', async () => {
+  const h = harness();
+  await h.connection.command(s => modeOrders(s, 1, 'reduced'));
+  h.connection.setPollInterval(900000);
+  assert.equal([...h.timers.values()][0].delay, 10000);
+  h.api.getSite = async () => { throw new FrisquetError('network'); };
+  await assert.rejects(h.connection.refresh(true));
+  await assert.rejects(h.connection.refresh(true));
+  assert.equal([...h.timers.values()][0].delay, 1800000);
+  h.connection.setPollInterval(300000);
+  assert.equal([...h.timers.values()][0].delay, 1800000);
+  h.api.getSite = async () => applyOrders(site(), h.orders.flat());
+  await h.connection.refresh(true);
+  assert.equal([...h.timers.values()][0].delay, 300000);
+  h.connection.stop();
+});

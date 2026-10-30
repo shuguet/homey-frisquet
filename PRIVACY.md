@@ -23,6 +23,14 @@ The app requests no Homey permissions and does not access other apps' devices.
 Homey controls access to device information, Flow tags, Insights and backups.
 Anyone with sufficient access to your Homey may be able to view this information.
 
+Optional connection and alarm notifications use Homey's notification service.
+When enabled, they include the paired device name and, for alarms, the alarm text
+reported by Frisquet. Both notification options are off by default. Local app
+settings retain outage timestamps and hashes of observed alarm names to avoid
+repeated notifications across restarts; this state contains no credentials or
+plain-text equipment identifiers. Notification delivery and history are managed
+by Homey and your notification preferences.
+
 ## Diagnostics and retention
 
 App logs contain anonymized raw Frisquet equipment responses, commands, response

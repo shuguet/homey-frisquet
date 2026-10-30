@@ -1,6 +1,6 @@
 {
   "id": "community.frisquet.connect",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "compatibility": ">=12.9.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -1185,6 +1185,16 @@
     "clearSupportHistory": {
       "method": "DELETE",
       "path": "/support-report",
+      "public": false
+    },
+    "getPreferences": {
+      "method": "GET",
+      "path": "/preferences",
+      "public": false
+    },
+    "savePreferences": {
+      "method": "PUT",
+      "path": "/preferences",
       "public": false
     }
   },

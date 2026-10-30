@@ -6,6 +6,8 @@ const FrisquetApi = require('./lib/frisquet-api');
 const { SiteConnection } = require('./lib/site-connection');
 const { FrisquetError } = require('./lib/errors');
 const { Diagnostics } = require('./lib/diagnostics');
+const { loadPreferences, validatePreferences } = require('./lib/preferences');
+const { InstallationNotifications, shortText } = require('./lib/notifications');
 
 function accountKey(credentials) {
   return createHash('sha256').update(JSON.stringify([credentials.email.toLowerCase(), credentials.password])).digest('hex');
@@ -17,6 +19,7 @@ class FrisquetApp extends Homey.App {
     this.connections = new Map();
     this.devices = new Set();
     this.stopping = false;
+    this.preferences = loadPreferences(this.homey.settings);
     this.diagnostics = new Diagnostics({
       getState: () => this.homey.settings?.get('supportJournal'),
       setState: state => this.homey.settings?.set('supportJournal', state),
@@ -63,9 +66,28 @@ class FrisquetApp extends Homey.App {
       }
       account.sites += 1;
       const connection = new SiteConnection(account.api, siteId, {
+        pollMs: this.preferences.pollMinutes * 60000,
         setTimer: this.homey.setTimeout.bind(this.homey), clearTimer: this.homey.clearTimeout.bind(this.homey),
       });
-      entry = { connection, refs: 0 };
+      const stateKey = `notifications_${this.diagnostics.reference(siteId)}`;
+      const notifications = new InstallationNotifications({
+        preferences: this.preferences,
+        state: this.homey.settings.get(stateKey) || {},
+        save: state => this.homey.settings.set(stateKey, state),
+        send: (kind, tokens) => {
+          const devices = [...this.devices].filter(device => device.getData().siteId === siteId);
+          const device = devices.find(d => !d.getData().zone) || devices[0];
+          const installation = shortText(device?.getName?.() || this.homey.__('notifications.installation'), 60);
+          return this.homey.notifications.createNotification({
+            excerpt: this.homey.__(`notifications.${kind}`, { ...tokens, installation }),
+          });
+        },
+        onError: () => this.error('Could not deliver or save a Frisquet notification'),
+        setTimer: this.homey.setTimeout.bind(this.homey), clearTimer: this.homey.clearTimeout.bind(this.homey),
+      });
+      connection.on('data', site => { notifications.success(site); });
+      connection.on('failure', () => { notifications.failure(); });
+      entry = { connection, notifications, refs: 0 };
       this.connections.set(siteKey, entry);
     }
     entry.refs += 1;
@@ -77,6 +99,7 @@ class FrisquetApp extends Homey.App {
         released = true;
         entry.refs -= 1;
         if (entry.refs > 0) return;
+        entry.notifications.stop();
         entry.connection.stop();
         this.connections.delete(siteKey);
         const account = this.accounts.get(key);
@@ -101,7 +124,10 @@ class FrisquetApp extends Homey.App {
 
   async onUninit() {
     this.stopping = true;
-    for (const { connection } of this.connections?.values() || []) connection.stop();
+    for (const { connection, notifications } of this.connections?.values() || []) {
+      notifications.stop();
+      connection.stop();
+    }
     for (const { api } of this.accounts?.values() || []) api.close();
     process.removeListener('uncaughtExceptionMonitor', this.crashMonitor);
     for (const [event, listener] of Object.entries(this.resourceListeners || {})) this.homey.removeListener?.(event, listener);
@@ -120,6 +146,22 @@ class FrisquetApp extends Homey.App {
 
   prepareSupportReport() {
     return this.diagnostics.prepare(this.supportDevices());
+  }
+
+  getPreferences() { return { ...this.preferences }; }
+
+  savePreferences(value) {
+    let preferences;
+    try { preferences = validatePreferences(value); }
+    catch { throw new Error(this.homey.__('preferences.invalid')); }
+    // Save the complete validated object before changing active connections.
+    this.homey.settings.set('preferences', preferences);
+    this.preferences = preferences;
+    for (const { connection, notifications } of this.connections.values()) {
+      connection.setPollInterval(preferences.pollMinutes * 60000);
+      notifications.setPreferences(preferences);
+    }
+    return this.getPreferences();
   }
 }
 

@@ -11,10 +11,12 @@ const manifest = require('../app.json');
 
 // A small SDK boundary mock. Production classes and their shared connection
 // logic run unchanged; only Homey's storage/capability/Flow APIs are supplied.
-function sdkHarness(language = 'en') {
+function sdkHarness(language = 'en', savedSettings = { supportJournal: { entries: [] } }) {
   const cards = new Map();
   const timers = new Map();
   const triggered = [];
+  const settings = new Map(Object.entries(structuredClone(savedSettings)));
+  const notifications = [];
   const translations = require(`../locales/${language}.json`);
   const card = (kind, id) => {
     assert.ok(manifest.flow[kind].some(c => c.id === id), `Unknown Flow card ${id}`);
@@ -26,11 +28,19 @@ function sdkHarness(language = 'en') {
     return cards.get(id);
   };
   const context = {
+    settings: {
+      get: key => structuredClone(settings.get(key)),
+      set: (key, value) => settings.set(key, structuredClone(value)),
+    },
+    notifications: { async createNotification(value) { notifications.push(value); } },
     i18n: { getLanguage: () => language },
     flow: { getActionCard: id => card('actions', id), getConditionCard: id => card('conditions', id), getDeviceTriggerCard: id => card('triggers', id) },
     setTimeout(fn, delay) { const id = {}; timers.set(id, { fn, delay }); return id; },
     clearTimeout(id) { timers.delete(id); },
-    __(key) { return key.split('.').reduce((v, k) => v?.[k], translations) || key; },
+    __(key, tokens = {}) {
+      const text = key.split('.').reduce((v, k) => v?.[k], translations) || key;
+      return text.replace(/__(\w+)__/g, (match, name) => tokens[name] ?? match);
+    },
   };
   class Base {
     constructor() { this.homey = context; }
@@ -47,6 +57,7 @@ function sdkHarness(language = 'en') {
       this.listeners = {};
     }
     getData() { return this.pairing.data; }
+    getName() { return this.pairing.name; }
     getCapabilities() { return [...this.capabilities.keys()]; }
     getAvailable() { return this.available; }
     getStoreValue(key) { return this.pairing.store[key]; }
@@ -80,11 +91,75 @@ function sdkHarness(language = 'en') {
     wrapper(localRequire, mod, mod.exports, path.dirname(file), file);
     return mod.exports;
   }
-  return { context, cards, timers, triggered, load };
+  return { context, cards, timers, triggered, load, settings, notifications };
 }
 
 const credentials = { email: 'sdk@example.invalid', password: 'fake-sdk-password', appId: 'fake-app-id' };
 const tick = () => new Promise(resolve => setImmediate(resolve));
+
+test('app preferences migrate existing polling, default new installs to fifteen minutes, and persist atomically', async t => {
+  const h = sdkHarness('fr');
+  const fresh = sdkHarness('en', {});
+  for (const instance of [h, fresh]) {
+    instance.context.app = new (instance.load('app.js'))();
+    await instance.context.app.onInit();
+    t.after(() => instance.context.app.onUninit());
+  }
+  const app = h.context.app;
+  const api = h.load('api.js');
+  const original = await api.getPreferences({ homey: h.context });
+  assert.deepEqual(original, { pollMinutes: 5, connectionNotifications: false, connectionDelayMinutes: 30, alarmNotifications: false });
+  assert.equal(fresh.context.app.getPreferences().pollMinutes, 15);
+  const lease = app.acquire(credentials, 'TEST-BOILER-01');
+  lease.connection.api.getSite = async () => site();
+  await lease.connection.refresh();
+  for (const change of [{ pollMinutes: 4 }, { pollMinutes: 61 }, { pollMinutes: 5.5 }, { pollMinutes: '10' },
+    { connectionDelayMinutes: 0 }, { connectionDelayMinutes: 121 }, { alarmNotifications: 'true' }]) {
+    await assert.rejects(api.savePreferences({ homey: h.context, body: { ...original, ...change } }), /Choisissez un intervalle/);
+    assert.deepEqual(h.settings.get('preferences'), original);
+    assert.equal(lease.connection.pollMs, 300000);
+  }
+  const saved = await api.savePreferences({ homey: h.context, body: { ...original, pollMinutes: 20, connectionDelayMinutes: 15 } });
+  assert.equal(saved.pollMinutes, 20);
+  assert.equal(lease.connection.pollMs, 1200000);
+  const other = app.acquire(credentials, 'TEST-BOILER-02');
+  assert.equal(other.connection.pollMs, 1200000);
+  const restarted = sdkHarness('en', Object.fromEntries(h.settings));
+  restarted.context.app = new (restarted.load('app.js'))();
+  await restarted.context.app.onInit();
+  t.after(() => restarted.context.app.onUninit());
+  assert.deepEqual(restarted.context.app.getPreferences(), saved);
+  assert.equal(h.notifications.length, 0);
+  lease.release(); other.release();
+});
+
+test('shared devices produce one localized alarm notification and never change diagnostic capture', async t => {
+  const h = sdkHarness('fr');
+  const app = new (h.load('app.js'))(); h.context.app = app;
+  await app.onInit(); t.after(() => app.onUninit());
+  const driver = new (h.load('drivers/boiler/driver.js'))();
+  const pairing = driver.pairDevices(site(), credentials)[0];
+  const device = new (h.load('drivers/boiler/device.js'))(pairing, 'boiler');
+  const leases = [app.acquire(credentials, 'TEST-BOILER-01'), app.acquire(credentials, 'TEST-BOILER-01')];
+  assert.equal(leases[0].connection, leases[1].connection);
+  let data = site();
+  leases[0].connection.api.getSite = async () => structuredClone(data);
+  await device.onInit(); await tick(); await device.updateQueue;
+  const diagnostics = app.diagnostics;
+  const preferences = app.savePreferences({ ...app.getPreferences(), alarmNotifications: true });
+  assert.equal(app.diagnostics, diagnostics);
+  assert.equal(Object.keys(preferences).some(key => /captur|diagnostic/i.test(key)), false);
+  data.alarmes = [{ nom: 'Défaut brûleur' }];
+  for (let i = 0; i < 3; i++) await leases[0].connection.refresh(true);
+  await [...app.connections.values()][0].notifications.queue;
+  assert.equal(h.notifications.length, 1);
+  assert.match(h.notifications[0].excerpt, /nouvelle alarme chaudière — Défaut brûleur/);
+  assert.ok(h.notifications[0].excerpt.startsWith(device.getName()));
+  assert.doesNotMatch(h.notifications[0].excerpt, /__\w+__|TEST-BOILER-01|fake-sdk-password/);
+  await device.onDeleted();
+  leases.forEach(lease => lease.release());
+  assert.equal(h.timers.size, 0);
+});
 
 test('native devices pair with stable IDs, register Flows, share polling, and reject invalid repairs', async t => {
   const h = sdkHarness();

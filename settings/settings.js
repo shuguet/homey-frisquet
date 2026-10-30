@@ -8,6 +8,52 @@ function onHomeyReady(Homey) {
   Homey.ready();
   const status = key => { elements.status.textContent = Homey.__(`support.${key}`); };
 
+  const form = document.getElementById('preferences');
+  const fields = document.getElementById('preferences-fields');
+  const poll = document.getElementById('poll-minutes');
+  const connection = document.getElementById('connection-notifications');
+  const delay = document.getElementById('connection-delay');
+  const alarms = document.getElementById('alarm-notifications');
+  const preferencesStatus = key => {
+    document.getElementById('preferences-status').textContent = key ? Homey.__(`preferences.${key}`) : '';
+  };
+  const showPreferences = preferences => {
+    poll.value = preferences.pollMinutes;
+    connection.checked = preferences.connectionNotifications;
+    delay.value = preferences.connectionDelayMinutes;
+    alarms.checked = preferences.alarmNotifications;
+    delay.disabled = !connection.checked;
+  };
+  connection.addEventListener('change', () => { delay.disabled = !connection.checked; });
+  preferencesStatus('loading');
+  Homey.api('GET', '/preferences', {}, (error, preferences) => {
+    if (error) { preferencesStatus('load_failed'); return; }
+    showPreferences(preferences);
+    fields.disabled = false;
+    preferencesStatus(null);
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    const preferences = {
+      pollMinutes: Number(poll.value),
+      connectionNotifications: connection.checked,
+      connectionDelayMinutes: Number(delay.value),
+      alarmNotifications: alarms.checked,
+    };
+    // A disabled delay field retains its last valid value.
+    if (!connection.checked && (!Number.isInteger(preferences.connectionDelayMinutes)
+      || preferences.connectionDelayMinutes < 5 || preferences.connectionDelayMinutes > 120)) preferences.connectionDelayMinutes = 30;
+    fields.disabled = true;
+    preferencesStatus('saving');
+    Homey.api('PUT', '/preferences', preferences, (error, saved) => {
+      fields.disabled = false;
+      if (error) { preferencesStatus('save_failed'); return; }
+      showPreferences(saved);
+      preferencesStatus('saved');
+    });
+  });
+
   elements.prepare.addEventListener('click', () => {
     elements.prepare.disabled = true;
     status('preparing');

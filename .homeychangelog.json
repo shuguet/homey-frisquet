@@ -10,5 +10,9 @@
   "0.5.1": {
     "en": "Made Homey’s built-in diagnostic report the main support route. Recent logs automatically include device capabilities alongside anonymized raw responses. JSON preview and export remain available under Advanced.",
     "fr": "Le rapport de diagnostic intégré à Homey devient la méthode principale de support. Les journaux récents incluent automatiquement les capacités des appareils et les réponses brutes anonymisées. L’aperçu et l’export JSON restent disponibles dans la section Avancé."
+  },
+  "0.6.0": {
+    "en": "Added app-wide refresh settings and optional notifications for prolonged connection failures, recovery, and new boiler or service alarms. Existing installations keep their five-minute interval; new installations default to fifteen minutes. Notifications are off until enabled.",
+    "fr": "Ajout d’un intervalle d’actualisation global et de notifications facultatives pour les pertes de connexion prolongées, leur rétablissement et les nouvelles alarmes chaudière ou de maintenance. Les installations existantes conservent cinq minutes ; les nouvelles utilisent quinze minutes. Les notifications sont désactivées par défaut."
   }
 }
