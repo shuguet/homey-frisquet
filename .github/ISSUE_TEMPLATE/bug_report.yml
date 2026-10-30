@@ -4,20 +4,11 @@ body:
   - type: markdown
     attributes:
       value: Please omit passwords, account tokens, serial numbers, addresses and alert contacts from reports and screenshots.
-  - type: input
-    id: versions
+  - type: textarea
+    id: report
     attributes:
-      label: App and Homey versions
-      placeholder: App 0.4.0, Homey Pro Early 2023, firmware 12.9.0
-    validations:
-      required: true
-  - type: input
-    id: boiler
-    attributes:
-      label: Boiler model and heating zones
-      placeholder: Hydromotrix, one heating zone
-    validations:
-      required: true
+      label: Support report
+      description: After reproducing the problem, open Frisquet Connect's app settings and prepare a report. Attach the JSON file here, or provide the Homey app diagnostic-report identifier. Versions and hardware details are collected automatically. If reporting is itself broken, describe that below.
   - type: textarea
     id: problem
     attributes:

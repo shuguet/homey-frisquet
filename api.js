@@ -3,6 +3,8 @@
 const { zoneState, hotWater, holiday } = require('./lib/model');
 
 module.exports = {
+  async prepareSupportReport({ homey }) { return homey.app.prepareSupportReport(); },
+  async clearSupportHistory({ homey }) { homey.app.diagnostics.clear(); return true; },
   // Authenticated, read-only diagnostics. No credentials, tokens, names,
   // installation IDs, alert contacts or arbitrary raw server values.
   async getDiagnostics({ homey }) {

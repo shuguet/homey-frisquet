@@ -40,5 +40,23 @@
     "with_tank": "Avec ballon de stockage",
     "no_service_alarms": "Aucune alarme de maintenance",
     "unspecified_alarm": "Alarme de maintenance (détails indisponibles)"
+  },
+  "support": {
+    "title": "Rapport de diagnostic",
+    "intro": "Reproduisez le problème, puis préparez un rapport. Il contient les réponses Frisquet récentes anonymisées, les commandes, les erreurs et les versions des logiciels.",
+    "privacy": "Les mots de passe, jetons, noms, contacts, adresses et identifiants des équipements sont anonymisés. Les données de fonctionnement, comme les températures et les modes, restent présentes. Rien n’est envoyé avant que vous choisissiez de partager le rapport.",
+    "prepare": "Préparer le rapport",
+    "clear": "Effacer l’historique local",
+    "preparing": "Préparation du rapport…",
+    "failed": "Le rapport n’a pas pu être préparé. Réessayez ou utilisez le rapport de diagnostic de l’application dans Homey.",
+    "ready": "Rapport prêt. Vérifiez son contenu ci-dessous avant de le partager.",
+    "share": "Joignez le fichier JSON à un signalement, ou envoyez maintenant un rapport de diagnostic de l’application depuis Homey. Le rapport préparé figure aussi dans le journal de l’application.",
+    "download": "Télécharger le JSON",
+    "copy": "Copier le rapport",
+    "issue": "Signaler un problème",
+    "preview": "Aperçu du rapport",
+    "copied": "Rapport copié.",
+    "select_copy": "Le rapport est sélectionné. Utilisez la commande Copier de votre appareil.",
+    "cleared": "Historique local enregistré effacé. Homey gère ses propres journaux séparément."
   }
 }

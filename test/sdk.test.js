@@ -47,6 +47,8 @@ function sdkHarness(language = 'en') {
       this.listeners = {};
     }
     getData() { return this.pairing.data; }
+    getCapabilities() { return [...this.capabilities.keys()]; }
+    getAvailable() { return this.available; }
     getStoreValue(key) { return this.pairing.store[key]; }
     async setStoreValue(key, value) { this.pairing.store[key] = value; }
     hasCapability(id) { return this.capabilities.has(id); }
@@ -370,6 +372,51 @@ test('French pairing, control and offline errors stay localized and do not revea
   assert.equal(device.unavailableMessage, 'Frisquet Connect n’a pas pu traiter la demande.');
   assert.doesNotMatch(device.unavailableMessage, /private-transport-token|https:/);
   await device.onDeleted();
+});
+
+test('support reports contain version and capability context, never device stores or names', async t => {
+  const h = sdkHarness();
+  const app = new (h.load('app.js'))(); h.context.app = app;
+  await app.onInit(); t.after(() => app.onUninit());
+  const pairing = new (h.load('drivers/boiler/driver.js'))().pairDevices(site(), credentials)[0];
+  const seed = app.acquire(credentials, 'TEST-BOILER-01');
+  seed.connection.api.getSite = async () => site();
+  const device = new (h.load('drivers/boiler/device.js'))(pairing, 'boiler');
+  await device.onInit(); seed.release(); await tick(); await device.updateQueue;
+  const api = h.load('api.js');
+  const report = await api.prepareSupportReport({ homey: h.context });
+  assert.equal(report.context.appVersion, manifest.version);
+  assert.equal(report.devices[0].available, true);
+  assert.ok(report.devices[0].capabilities.includes('target_temperature.comfort'));
+  assert.doesNotMatch(JSON.stringify(report), /TEST-BOILER-01|fake-sdk-password|sdk@example/);
+  for (const route of Object.values(manifest.api)) assert.equal(route.public, false);
+  await api.clearSupportHistory({ homey: h.context });
+  assert.equal(app.diagnostics.report().entries.length, 0);
+  await device.onDeleted();
+});
+
+test('resource warnings capture Homey data without calling restricted process metrics', async t => {
+  const h = sdkHarness();
+  const listeners = new Map();
+  h.context.on = (event, listener) => listeners.set(event, listener);
+  h.context.removeListener = event => listeners.delete(event);
+  const app = new (h.load('app.js'))();
+  h.context.app = app;
+  await app.onInit();
+  t.after(() => app.onUninit());
+  const memoryUsage = process.memoryUsage;
+  const uptime = process.uptime;
+  try {
+    process.memoryUsage = process.uptime = () => { throw new Error('Not available in the Homey sandbox'); };
+    for (const event of ['memwarn', 'cpuwarn']) listeners.get(event)({ count: 1, limit: 5, future_metric: 42 });
+  } finally { process.memoryUsage = memoryUsage; process.uptime = uptime; }
+  const warnings = app.diagnostics.report().entries.filter(entry => /^(memwarn|cpuwarn)$/.test(entry.kind));
+  assert.equal(warnings.length, 2);
+  for (const warning of warnings) {
+    assert.equal(warning.data.count, 1);
+    assert.equal(warning.data.limit, 5);
+    assert.equal(warning.data.future_metric, 42);
+  }
 });
 
 test('repair updates all devices on the account and renews one shared connection', async t => {

@@ -40,5 +40,23 @@
     "with_tank": "With storage tank",
     "no_service_alarms": "No service alarms",
     "unspecified_alarm": "Service alarm (details unavailable)"
+  },
+  "support": {
+    "title": "Support report",
+    "intro": "Reproduce the problem, then prepare a report. It includes recent anonymized Frisquet responses, commands, errors and software versions.",
+    "privacy": "Passwords, tokens, names, contacts, addresses and equipment identifiers are anonymized. Operating data such as temperatures and modes remains in the report. Nothing is sent until you choose to share it.",
+    "prepare": "Prepare report",
+    "clear": "Clear local history",
+    "preparing": "Preparing report…",
+    "failed": "The report could not be prepared. Try again or use Homey’s app diagnostic report.",
+    "ready": "Report ready. Review it below before sharing.",
+    "share": "Attach the JSON file to a support issue, or send an app diagnostic report from Homey now. The prepared report is also included in the app log.",
+    "download": "Download JSON",
+    "copy": "Copy report",
+    "issue": "Open a support issue",
+    "preview": "Report preview",
+    "copied": "Report copied.",
+    "select_copy": "The report is selected. Use your device’s Copy command.",
+    "cleared": "Stored local history cleared. Homey manages its own app logs separately."
   }
 }

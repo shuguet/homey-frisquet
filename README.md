@@ -4,7 +4,7 @@ A native Homey SDK v3 app for Frisquet boilers equipped with a Frisquet Connect
 box. It runs on Homey Pro and talks directly to Frisquet's cloud. No Home Assistant
 instance, Raspberry Pi, container, MQTT broker, or computer left running is needed.
 
-**Version 0.4.0** combines heating and hot water in one device, with Boost as the
+**Version 0.5.0** combines heating and hot water in one device, with Boost as the
 quick action and equipment/installation details in the sensor view. Automated
 checks and live verification are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -63,8 +63,9 @@ Homey's device presentation settings or request permission to control other apps
 
 Your credentials are entered in Homey's pairing screen, not in source code or
 terminal commands. Homey stores them in each device's private store to renew
-expired sessions. Tokens stay in memory. Logs/errors never include raw API
-responses, credential-bearing URLs, passwords, or tokens. The app has no analytics
+expired sessions. Tokens stay in memory. Support logs retain anonymized raw
+equipment responses; authentication bodies, credential-bearing URLs, passwords
+and tokens are excluded. The app has no analytics
 or third-party backend. Its cloud connections go to `fcutappli.frisquet.com` and
 `fcappcom.frisquet.com`.
 
@@ -165,9 +166,14 @@ for Frisquet's update delay. Finally restart the Homey app and check that device
 reconnect without re-pairing. No live heating commands have been sent by the
 automated tests in this repository.
 
-If something fails, the useful details are the boiler model, Homey firmware,
-which action failed, the sanitized error/status, and what the official app shows.
-Do not paste your password or token. Holiday mode must be ended in the official
+If something fails, open this app’s **Settings → Prepare report** after reproducing
+the problem. Download or copy the JSON report and attach it to a support issue,
+or send a Homey app diagnostic report immediately afterwards. Versions,
+capabilities and anonymized raw exchanges are collected automatically, including
+responses from an unsuccessful pairing attempt. Add a short description of the
+problem. See [support reporting](docs/SUPPORT.md) for the workflow and limits.
+
+Holiday mode must be ended in the official
 app before this app changes heating modes; holiday scheduling, weekly programme
 editing, and consumption history are outside this first version.
 

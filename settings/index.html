@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/homey.js" data-origin="settings"></script>
+    <script src="settings.js" defer></script>
+    <style>
+      body { padding: 16px; }
+      button, a { margin: 4px 8px 12px 0; }
+      textarea { box-sizing: border-box; width: 100%; min-height: 240px; font: 12px/1.5 monospace; }
+      #status { min-height: 1.5em; }
+      [hidden] { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <h1 data-i18n="support.title">Support report</h1>
+    <p data-i18n="support.intro">Reproduce the problem, then prepare a report. It includes recent anonymized Frisquet responses, commands, errors and software versions.</p>
+    <p data-i18n="support.privacy">Passwords, tokens, names, contacts, addresses and equipment identifiers are anonymized. Operating data such as temperatures and modes remains in the report. Nothing is sent until you choose to share it.</p>
+    <button id="prepare" class="homey-button-primary" data-i18n="support.prepare">Prepare report</button>
+    <button id="clear" class="homey-button-secondary" data-i18n="support.clear">Clear local history</button>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="result" hidden>
+      <p data-i18n="support.share">Attach the JSON file to a support issue, or send an app diagnostic report from Homey now. The prepared report is also included in the app log.</p>
+      <button id="download" class="homey-button-primary" data-i18n="support.download">Download JSON</button>
+      <button id="copy" class="homey-button-secondary" data-i18n="support.copy">Copy report</button>
+      <p><a href="https://github.com/shuguet/homey-frisquet/issues/new?template=bug_report.yml" target="_blank" rel="noopener noreferrer" data-i18n="support.issue">Open a support issue</a></p>
+      <label for="report" data-i18n="support.preview">Report preview</label>
+      <textarea id="report" readonly spellcheck="false"></textarea>
+    </section>
+  </body>
+</html>

@@ -58,7 +58,10 @@ for the same account.
 
 The read-only sensor view preserves an explicit subset of `produit`, `agi`,
 `sigmacom`, location fields, `emails_alerte`, `telephones_alerte`, and `alarmes_pro`.
-These user-requested details are excluded from diagnostic responses and logging.
+The support journal captures the original JSON before this subset is selected.
+It anonymizes identifiers, contacts, names and location fields before storage or
+logging, preserving equipment fields for offline diagnosis. Authentication bodies
+are omitted. See [support reports](SUPPORT.md) for capture bounds and decoding.
 `TYPE_ECS` 0 is without a storage tank; 1 is with a storage tank, following the
 independent integration's enum. Unknown types are not guessed. `solaire` and
 `AVEC_ECS` preserve unknown/null values. Service alarms are separate from normal

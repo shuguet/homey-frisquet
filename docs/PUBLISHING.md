@@ -1,6 +1,6 @@
 # Publishing Frisquet Connect
 
-The release candidate is **0.4.0**, with app ID `community.frisquet.connect`.
+The release candidate is **0.5.0**, with app ID `community.frisquet.connect`.
 The ID and driver IDs remain unchanged so existing devices and Flows can upgrade.
 
 Publisher: Sylvain Huguet. Source and support:
@@ -33,7 +33,7 @@ Frisquet app to compare state and restore any settings changed during testing.
 ## Upload and certification
 
 1. Sign in using `homey login`, then run `homey app publish` in the project root.
-   Keep version 0.4.0 for the first upload of this candidate. English and French
+   Keep version 0.5.0 for the first upload of this candidate. English and French
    release notes are already in `.homeychangelog.json`.
 2. Open [Homey Developer Tools](https://tools.developer.homey.app), choose
    **Apps SDK → My Apps → Frisquet Connect**, and open the uploaded Draft.
@@ -68,9 +68,11 @@ action. Legacy paired zone devices remain compatible, but that driver is not
 offered for new pairing. The app does not infer water temperatures or burner
 activity from room temperature.
 
-Account credentials stay in Homey's private device stores, session tokens remain
-in memory, and logs omit secrets and raw responses. There is no analytics or
-developer-operated backend. See PRIVACY.md for details. Manufacturer artwork
+Account credentials stay in Homey's private device stores and session tokens
+remain in memory. Support history captures anonymized raw equipment responses,
+commands and errors with bounded local retention. Users can preview and share a
+report from app settings; authentication bodies are never logged. There is no
+analytics or developer-operated backend. See PRIVACY.md for details. Manufacturer artwork
 sources and ownership are recorded in THIRD_PARTY_NOTICES.md; the listing clearly
 identifies the integration as unofficial.
 

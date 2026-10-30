@@ -2,5 +2,9 @@
   "0.4.0": {
     "en": "Heating and hot water together, with numeric profile temperatures, Boost, equipment information and automatic updates. Added French error messages and refreshed the store presentation. New devices can select Room temperature in their status-indicator settings; existing selections are preserved.",
     "fr": "Chauffage et eau chaude réunis, avec températures de profil numériques, Boost, informations de l’installation et actualisation automatique. Ajout des messages d’erreur en français et nouvelle présentation. Pour les nouveaux appareils, la température ambiante se choisit dans le réglage de l’indicateur d’état ; les choix existants sont conservés."
+  },
+  "0.5.0": {
+    "en": "Added support reports with anonymized raw Frisquet responses, command history, errors and software versions. Reports can be downloaded or included in a Homey app diagnostic report, including when pairing an unfamiliar device fails.",
+    "fr": "Ajout de rapports contenant les réponses Frisquet brutes anonymisées, les commandes, les erreurs et les versions. Téléchargez le rapport ou incluez-le dans un diagnostic Homey, même si l’association d’un équipement inconnu échoue."
   }
 }
