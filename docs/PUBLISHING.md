@@ -1,6 +1,6 @@
 # Publishing Frisquet Connect
 
-The release candidate is **0.5.0**, with app ID `community.frisquet.connect`.
+The release candidate is **0.5.1**, with app ID `community.frisquet.connect`.
 The ID and driver IDs remain unchanged so existing devices and Flows can upgrade.
 
 Publisher: Sylvain Huguet. Source and support:
@@ -33,7 +33,7 @@ Frisquet app to compare state and restore any settings changed during testing.
 ## Upload and certification
 
 1. Sign in using `homey login`, then run `homey app publish` in the project root.
-   Keep version 0.5.0 for the first upload of this candidate. English and French
+   Keep version 0.5.1 for the first upload of this candidate. English and French
    release notes are already in `.homeychangelog.json`.
 2. Open [Homey Developer Tools](https://tools.developer.homey.app), choose
    **Apps SDK → My Apps → Frisquet Connect**, and open the uploaded Draft.
@@ -49,6 +49,18 @@ Frisquet app to compare state and restore any settings changed during testing.
 Publishing for Homey Pro does not require a paid Verified Developer subscription.
 This app targets `local` (Homey Pro), although it uses Frisquet's cloud service.
 It is not a Homey Cloud or Homey Bridge integration.
+
+## Native report acceptance check
+
+After certification makes the Test build available, install it from the store
+without removing existing devices. Confirm its installation origin is `appstore`,
+then reproduce a read-only update or pairing problem and send **Create Diagnostics
+Report** from Homey's app management page without using the advanced preview.
+Verify that the report arrives in the app's developer dashboard and that the
+offline decoder recovers the anonymized raw response and software/device context.
+CLI installations use `devkit_install`; Homey's web interface hides its report
+button for that origin. A local capture/decoder check does not verify delivery
+through Homey's reporting service.
 
 ## Notes for the reviewer
 
@@ -70,8 +82,9 @@ activity from room temperature.
 
 Account credentials stay in Homey's private device stores and session tokens
 remain in memory. Support history captures anonymized raw equipment responses,
-commands and errors with bounded local retention. Users can preview and share a
-report from app settings; authentication bodies are never logged. There is no
+commands and errors with bounded local retention. Homey's built-in diagnostic
+report is the main sharing route. Advanced preview/export is available from
+Configure; authentication bodies are never logged. There is no
 analytics or developer-operated backend. See PRIVACY.md for details. Manufacturer artwork
 sources and ownership are recorded in THIRD_PARTY_NOTICES.md; the listing clearly
 identifies the integration as unofficial.

@@ -1,8 +1,7 @@
 # Privacy
 
 Frisquet Connect for Homey Pro runs on your Homey and communicates directly with
-Frisquet. It has no analytics, advertising, developer-operated server or external
-crash-reporting service.
+Frisquet. It has no analytics, advertising or developer-operated server.
 
 ## Account and device data
 
@@ -27,7 +26,8 @@ Anyone with sufficient access to your Homey may be able to view this information
 ## Diagnostics and retention
 
 App logs contain anonymized raw Frisquet equipment responses, commands, response
-status, timing and errors. Authentication request and response bodies are never
+status, timing, errors, software versions and paired driver/capability IDs.
+Authentication request and response bodies are never
 recorded. Known credential, contact, location, free-text name and equipment-ID
 fields are anonymized before storage or logging. Known secret values and common
 email, phone, IP and token formats are also filtered when repeated in other fields.
@@ -35,8 +35,9 @@ Equipment identifiers use stable aliases to match related exchanges.
 
 Unknown technical fields are preserved for diagnosing different hardware.
 Operating information such as temperatures, modes, schedules and configuration
-can remain in a report. The app settings page lets you inspect the JSON before
-sharing it. No report is automatically uploaded to a developer-operated service.
+can remain in a report. The advanced section in the app's Configure page lets you
+inspect saved history. No report is automatically uploaded to a developer-operated
+service.
 
 The app retains at most 128 records, 256 KiB and 24 hours of local history,
 whichever limit is reached first. Raw payload capture is also size-limited and
@@ -44,11 +45,14 @@ marks truncation. History is saved in Homey's app settings across restarts,
 usually within ten seconds. Clear it using **Clear local history**. Homey's own
 app logs and backups have separate retention controls.
 
-**Prepare report** packages that history with software versions and capability
-IDs, and adds it to the Homey app log. Sharing the JSON file or sending Homey's
-app diagnostic report is initiated by the user. The app's support API endpoints
-require Homey authentication. Device names, stores and account settings are not
-dumped into the report.
+**Create Diagnostics Report**, on Homey's app management page, sends recent app
+logs to the developer through Homey's reporting service when the user submits
+the form. It does not require a JSON export or a preparation step.
+**Advanced → Preview saved history** packages the longer local history and adds
+it to the app log. It does not upload the history. Users can download/copy that
+JSON and choose where to share it. The app's support API endpoints require Homey
+authentication. Device names, stores and account settings are not dumped into
+the report.
 
 Removing every device associated with an account removes its credential stores
 from the app's active device data. Account sessions are closed when no paired
@@ -58,9 +62,10 @@ or change the boiler's configuration.
 
 ## Support
 
-Use the [project issue tracker](https://github.com/shuguet/homey-frisquet/issues)
-for app support. Issues are public: describe the problem and attach a report
-after reviewing its preview, or provide the Homey app diagnostic report ID.
+Send a Homey app diagnostic report after reproducing a problem. The
+[project issue tracker](https://github.com/shuguet/homey-frisquet/issues) is also
+available for discussion. Issues are public: describe the problem and provide
+the Homey report ID, or attach an advanced export after reviewing it.
 The report supplies software versions and available equipment details. Omit
 passwords, tokens, serial numbers, addresses and alert contacts from screenshots
 and any text you add yourself.

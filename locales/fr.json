@@ -43,20 +43,26 @@
   },
   "support": {
     "title": "Rapport de diagnostic",
-    "intro": "Reproduisez le problème, puis préparez un rapport. Il contient les réponses Frisquet récentes anonymisées, les commandes, les erreurs et les versions des logiciels.",
+    "intro": "Après avoir reproduit le problème, utilisez Créer un rapport de diagnostic dans Homey pour envoyer les journaux récents de l’application directement au développeur.",
     "privacy": "Les mots de passe, jetons, noms, contacts, adresses et identifiants des équipements sont anonymisés. Les données de fonctionnement, comme les températures et les modes, restent présentes. Rien n’est envoyé avant que vous choisissiez de partager le rapport.",
-    "prepare": "Préparer le rapport",
+    "prepare": "Consulter l’historique enregistré",
     "clear": "Effacer l’historique local",
-    "preparing": "Préparation du rapport…",
-    "failed": "Le rapport n’a pas pu être préparé. Réessayez ou utilisez le rapport de diagnostic de l’application dans Homey.",
-    "ready": "Rapport prêt. Vérifiez son contenu ci-dessous avant de le partager.",
-    "share": "Joignez le fichier JSON à un signalement, ou envoyez maintenant un rapport de diagnostic de l’application depuis Homey. Le rapport préparé figure aussi dans le journal de l’application.",
+    "preparing": "Chargement de l’historique…",
+    "failed": "L’historique n’a pas pu être chargé. Réessayez ou utilisez le rapport de diagnostic de l’application dans Homey.",
+    "ready": "Historique prêt. Vérifiez son contenu ci-dessous avant de le partager.",
+    "share": "Vérifiez cet historique avant de le partager. Vous pouvez joindre le JSON à un signalement. Il est aussi ajouté au journal pour votre prochain rapport de diagnostic Homey.",
     "download": "Télécharger le JSON",
     "copy": "Copier le rapport",
     "issue": "Signaler un problème",
     "preview": "Aperçu du rapport",
     "copied": "Rapport copié.",
     "select_copy": "Le rapport est sélectionné. Utilisez la commande Copier de votre appareil.",
-    "cleared": "Historique local enregistré effacé. Homey gère ses propres journaux séparément."
+    "cleared": "Historique local enregistré effacé. Homey gère ses propres journaux séparément.",
+    "mobile": "Mobile : Plus → Applications → Frisquet Connect → roue dentée → Créer un rapport de diagnostic.",
+    "web": "Web : Paramètres → Frisquet Connect → Créer un rapport de diagnostic.",
+    "native_help": "Fermez cette page de configuration pour trouver ce bouton. Décrivez le problème dans le formulaire Homey, puis envoyez-le. Les réponses récentes anonymisées, les erreurs et les versions figurent déjà dans le journal.",
+    "availability": "Homey affiche son bouton de diagnostic pour les installations depuis l’App Store. S’il manque, ou si vous avez besoin d’un historique plus long, utilisez l’export avancé ci-dessous.",
+    "advanced": "Avancé : consulter ou exporter l’historique",
+    "advanced_help": "Utilisez cette option pour une installation de développement, pour examiner les données enregistrées ou si le support demande un historique plus long. L’aperçu n’envoie rien à un service externe."
   }
 }

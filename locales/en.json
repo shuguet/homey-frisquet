@@ -43,20 +43,26 @@
   },
   "support": {
     "title": "Support report",
-    "intro": "Reproduce the problem, then prepare a report. It includes recent anonymized Frisquet responses, commands, errors and software versions.",
+    "intro": "After reproducing the problem, use Homey’s Create Diagnostics Report to send recent app logs directly to the developer.",
     "privacy": "Passwords, tokens, names, contacts, addresses and equipment identifiers are anonymized. Operating data such as temperatures and modes remains in the report. Nothing is sent until you choose to share it.",
-    "prepare": "Prepare report",
+    "prepare": "Preview saved history",
     "clear": "Clear local history",
-    "preparing": "Preparing report…",
-    "failed": "The report could not be prepared. Try again or use Homey’s app diagnostic report.",
-    "ready": "Report ready. Review it below before sharing.",
-    "share": "Attach the JSON file to a support issue, or send an app diagnostic report from Homey now. The prepared report is also included in the app log.",
+    "preparing": "Loading saved history…",
+    "failed": "The saved history could not be loaded. Try again or use Homey’s app diagnostic report.",
+    "ready": "History ready. Review it below before sharing.",
+    "share": "Review this saved history before sharing it. You can attach the JSON to a support issue. It is also added to the app log for your next Homey diagnostic report.",
     "download": "Download JSON",
     "copy": "Copy report",
     "issue": "Open a support issue",
     "preview": "Report preview",
     "copied": "Report copied.",
     "select_copy": "The report is selected. Use your device’s Copy command.",
-    "cleared": "Stored local history cleared. Homey manages its own app logs separately."
+    "cleared": "Stored local history cleared. Homey manages its own app logs separately.",
+    "mobile": "Mobile: More → Apps → Frisquet Connect → settings gear → Create Diagnostics Report.",
+    "web": "Web: Settings → Frisquet Connect → Create Diagnostics Report.",
+    "native_help": "Close this configuration page to find that button. Describe what went wrong in Homey’s report form and send it. Recent anonymized responses, errors and software versions are already in the log.",
+    "availability": "Homey shows its report button for App Store installations. If it is missing, or you need a longer history, use the advanced export below.",
+    "advanced": "Advanced: preview or export history",
+    "advanced_help": "Use this for a development installation, to inspect saved data, or when support requests a longer history. Previewing saves nothing to an external service."
   }
 }

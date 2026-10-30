@@ -40,9 +40,14 @@ function decode(text) {
     } catch { incomplete++; }
   }
   if (!reports.length && !entries.length) throw new Error('No complete Frisquet report found. Export the JSON report from the app settings.');
-  const latest = reports.at(-1);
-  return latest ? { ...latest, incompleteLogRecords: incomplete }
-    : { format: 'frisquet-trace-v1', incompleteLogRecords: incomplete, entries: entries.sort((a, b) => a.at - b.at) };
+  const latest = reports.sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)).at(-1);
+  // A user may preview history, reproduce another problem, then send Homey's
+  // native report. Keep subsequent traces instead of returning a stale preview.
+  const combined = [...(latest?.entries || []), ...entries];
+  const unique = [...new Map(combined.map(entry => [JSON.stringify(entry), entry])).values()]
+    .sort((a, b) => a.at - b.at);
+  return latest ? { ...latest, entries: unique, incompleteLogRecords: incomplete }
+    : { format: 'frisquet-trace-v1', incompleteLogRecords: incomplete, entries: unique };
 }
 
 if (require.main === module) {

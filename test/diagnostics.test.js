@@ -129,3 +129,18 @@ test('log decoder detects incomplete records and raw traces remain usable withou
   chunk.total++;
   assert.throws(() => decode(`FRISQUET_TRACE ${JSON.stringify(chunk)}`), /No complete Frisquet report/);
 });
+
+test('native reports retain newer traces after a history preview without duplicating older entries', () => {
+  const logs = [];
+  let now = 100000000;
+  const diagnostics = new Diagnostics({ log: line => logs.push(line), now: () => now });
+  diagnostics.record('before_preview', { value: 1 });
+  const preview = diagnostics.prepare([]);
+  now += 1000;
+  diagnostics.record('after_preview', { value: 2 });
+  diagnostics.close();
+  const decoded = decode(JSON.stringify({ stack: logs.join('\n') }));
+  assert.equal(decoded.id, preview.id);
+  assert.deepEqual(decoded.entries.map(entry => entry.kind), ['before_preview', 'after_preview']);
+  assert.equal(decoded.entries[1].data.value, 2);
+});

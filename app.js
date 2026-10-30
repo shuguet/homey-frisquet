@@ -23,7 +23,7 @@ class FrisquetApp extends Homey.App {
       log: line => this.log(line),
       context: () => ({ appVersion: require('./app.json').version, homeyVersion: this.homey.version ?? null,
         platform: this.homey.platform ?? null, platformVersion: this.homey.platformVersion ?? null,
-        nodeVersion: process.version, architecture: process.arch }),
+        nodeVersion: process.version, architecture: process.arch, devices: this.supportDevices() }),
     });
     this.diagnostics.record('app_start', {});
     this.crashMonitor = error => this.diagnostics.failure('uncaught_exception', error);
@@ -109,14 +109,17 @@ class FrisquetApp extends Homey.App {
     this.diagnostics?.close();
   }
 
-  prepareSupportReport() {
-    const devices = [...this.devices].map(device => ({
+  supportDevices() {
+    return [...this.devices].map(device => ({
       installation: this.diagnostics.reference(device.getData().siteId),
       driver: device.getData().zone ? 'zone' : 'boiler',
       available: device.getAvailable?.() ?? null,
       capabilities: device.getCapabilities?.() ?? [],
     }));
-    return this.diagnostics.prepare(devices);
+  }
+
+  prepareSupportReport() {
+    return this.diagnostics.prepare(this.supportDevices());
   }
 }
 

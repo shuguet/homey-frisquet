@@ -4,7 +4,7 @@ A native Homey SDK v3 app for Frisquet boilers equipped with a Frisquet Connect
 box. It runs on Homey Pro and talks directly to Frisquet's cloud. No Home Assistant
 instance, Raspberry Pi, container, MQTT broker, or computer left running is needed.
 
-**Version 0.5.0** combines heating and hot water in one device, with Boost as the
+**Version 0.5.1** combines heating and hot water in one device, with Boost as the
 quick action and equipment/installation details in the sensor view. Automated
 checks and live verification are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
 
@@ -166,12 +166,13 @@ for Frisquet's update delay. Finally restart the Homey app and check that device
 reconnect without re-pairing. No live heating commands have been sent by the
 automated tests in this repository.
 
-If something fails, open this app’s **Settings → Prepare report** after reproducing
-the problem. Download or copy the JSON report and attach it to a support issue,
-or send a Homey app diagnostic report immediately afterwards. Versions,
-capabilities and anonymized raw exchanges are collected automatically, including
-responses from an unsuccessful pairing attempt. Add a short description of the
-problem. See [support reporting](docs/SUPPORT.md) for the workflow and limits.
+If something fails, reproduce the problem, then use **Create Diagnostics Report**
+on Homey's Frisquet Connect app page. Homey sends recent logs directly to the
+developer. Versions, capabilities and anonymized raw exchanges are collected
+automatically, including responses from an unsuccessful pairing attempt. Add a
+short description of the problem in Homey's form. Advanced preview and JSON
+export remain available in Configure for development installations or longer
+history. See [support reporting](docs/SUPPORT.md) for the workflow and limits.
 
 Holiday mode must be ended in the official
 app before this app changes heating modes; holiday scheduling, weekly programme

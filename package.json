@@ -1,6 +1,6 @@
 {
   "name": "homey-frisquet",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "description": "Native Homey Pro integration for Frisquet Connect",
   "main": "app.js",

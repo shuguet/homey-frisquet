@@ -6,5 +6,9 @@
   "0.5.0": {
     "en": "Added support reports with anonymized raw Frisquet responses, command history, errors and software versions. Reports can be downloaded or included in a Homey app diagnostic report, including when pairing an unfamiliar device fails.",
     "fr": "Ajout de rapports contenant les réponses Frisquet brutes anonymisées, les commandes, les erreurs et les versions. Téléchargez le rapport ou incluez-le dans un diagnostic Homey, même si l’association d’un équipement inconnu échoue."
+  },
+  "0.5.1": {
+    "en": "Made Homey’s built-in diagnostic report the main support route. Recent logs automatically include device capabilities alongside anonymized raw responses. JSON preview and export remain available under Advanced.",
+    "fr": "Le rapport de diagnostic intégré à Homey devient la méthode principale de support. Les journaux récents incluent automatiquement les capacités des appareils et les réponses brutes anonymisées. L’aperçu et l’export JSON restent disponibles dans la section Avancé."
   }
 }

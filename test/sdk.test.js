@@ -419,6 +419,37 @@ test('resource warnings capture Homey data without calling restricted process me
   }
 });
 
+test('native app logs include raw responses and device context without preparing an export', async t => {
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  const raw = site(); raw.future_hardware = { sensor: 217 };
+  globalThis.fetch = async url => {
+    calls++;
+    return new Response(JSON.stringify(url.includes('authentifications') ? auth('test-token') : raw));
+  };
+  t.after(() => { globalThis.fetch = originalFetch; });
+  const h = sdkHarness();
+  const app = new (h.load('app.js'))(); h.context.app = app;
+  const logs = []; app.log = line => logs.push(line);
+  await app.onInit(); t.after(() => app.onUninit());
+  const pairing = new (h.load('drivers/boiler/driver.js'))().pairDevices(raw, credentials)[0];
+  const device = new (h.load('drivers/boiler/device.js'))(pairing, 'boiler');
+  await device.onInit();
+  t.after(() => device.onDeleted());
+  await device.connection.refresh(); await tick(); await device.updateQueue;
+  const { decode } = require('../scripts/decode-report');
+  const report = decode(logs.join('\n'));
+  assert.equal(report.format, 'frisquet-trace-v1');
+  assert.ok(logs.every(line => !line.startsWith('FRISQUET_SUPPORT')));
+  const exchange = report.entries.find(entry => entry.data.endpoint === '/sites/:installation');
+  assert.equal(exchange.data.response.future_hardware.sensor, 217);
+  assert.equal(exchange.context.appVersion, manifest.version);
+  assert.equal(exchange.context.devices[0].driver, 'boiler');
+  assert.ok(exchange.context.devices[0].capabilities.includes('target_temperature.comfort'));
+  assert.doesNotMatch(JSON.stringify(report), /TEST-BOILER-01|fake-sdk-password|sdk@example|test-token/);
+  assert.equal(calls, 2, 'Reporting must not add network requests');
+});
+
 test('repair updates all devices on the account and renews one shared connection', async t => {
   const originalFetch = globalThis.fetch;
   const passwordsUsed = [];

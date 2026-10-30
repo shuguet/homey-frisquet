@@ -1,19 +1,32 @@
 # Support reports
 
-After reproducing a problem, open the Frisquet Connect app's settings in Homey
-and select **Prepare report**. This works even when an unfamiliar device could
-not be paired.
+After reproducing a problem, send **Homey's app diagnostic report** for Frisquet
+Connect. Recent anonymized API exchanges and software/device context are already
+in the app log. No export or preparation step is required.
 
-Review the preview, then either:
+- **Mobile:** More → Apps → Frisquet Connect → settings gear → Create Diagnostics Report.
+- **Web:** Settings → Frisquet Connect → Create Diagnostics Report.
 
-- Download/copy the JSON and attach it to a GitHub support issue.
-- Send an **app diagnostic report** for Frisquet Connect from Homey. The prepared
-  bundle is already included in the app log. Share Homey's report identifier in
-  the issue so the maintainer can locate it.
+The button is on Homey's app management page, outside the app's Configure page.
+Describe what went wrong in the report form and send it. Homey delivers the app
+logs to the developer. If you also open a GitHub issue, include the report ID to
+link the discussion to the delivered report; no JSON attachment is needed.
 
 A general Homey system diagnostic report is different from an app report. The
-maintainer needs the Frisquet app report. Include a short description of what
-went wrong; the technical details are supplied by the report.
+maintainer needs the Frisquet app report.
+
+## Advanced preview and export
+
+Homey's report button is available for App Store installations. Development
+installations made with the CLI do not show it. If the button is missing, support
+needs older history, or you want to inspect saved data, open the app's Configure
+page and expand **Advanced: preview or export history**. Select **Preview saved
+history**, review the JSON, then download/copy it if needed. This works even when
+an unfamiliar device could not be paired.
+
+Opening the page or preview does not send a report. The preview also writes the
+saved history into Homey's app log, so a native report sent immediately afterwards
+can include it, subject to Homey's log limits.
 
 ## What is captured
 
@@ -44,10 +57,11 @@ truncation is marked. Older entries are removed first. History is saved locally
 within ten seconds and on orderly shutdown/error reporting. A sudden power loss
 can lose the most recent unsaved entries.
 
-Homey's rolling app log also receives compressed, chunked raw records. Its own
-retention may be shorter. Preparing a report writes a fresh complete bundle to
-that log, so send the Homey app report directly afterwards. If log chunks are
-missing, use the JSON download instead.
+Homey's rolling app log receives compressed, chunked raw records as requests
+happen, with software versions and paired device/capability context. Its retention
+may be shorter than the local journal. Send the native report immediately after
+reproducing the issue. If log chunks are missing or older history is needed, use
+the advanced JSON download.
 
 ## Maintainer workflow
 
@@ -58,8 +72,9 @@ npm run --silent decode:report -- /path/to/homey-app-log.txt > /path/to/frisquet
 ```
 
 The decoder accepts text logs or JSON log exports, reassembles compressed chunks,
-and reports incomplete records. It prefers the latest prepared bundle. If there
-is none, it returns the complete raw trace entries still present in the log.
+and reports incomplete records. It reads ordinary trace records without requiring
+a prepared bundle. If a saved-history preview is also present, it merges that
+bundle with the traces, including events after the preview, and removes duplicates.
 
 Compare the raw responses with the failing command and the app version. Use a
 sanitized response as a local regression fixture before adapting a mapping.

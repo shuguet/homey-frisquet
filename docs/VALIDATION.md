@@ -1,11 +1,11 @@
-# Validation — 0.5.0
+# Validation — 0.5.1
 
 Checked on 2026-10-30 with Node.js 22.23.4 and Homey CLI 4.6.2.
 The target runtime is Homey’s Node.js 22 (firmware 12.9.0 or newer).
 
-- 52 automated cases passed: 13 API/transport, 12 model/mapping, 3 information
-  formatting, 6 connection lifecycle/queue, 11 Homey SDK boundary cases,
-  1 error-localization case and 6 support-report cases.
+- 54 automated cases passed: 13 API/transport, 12 model/mapping, 3 information
+  formatting, 6 connection lifecycle/queue, 12 Homey SDK boundary cases,
+  1 error-localization case and 7 support-report cases.
 - JavaScript syntax, JSON and release metadata checks passed.
 - Homey build and publish-level validation passed without permission warnings.
 - No Homey permissions or runtime npm dependencies are requested.
@@ -27,6 +27,9 @@ restart persistence, log decoding and authenticated report endpoints. Failures i
 support logging or storage do not interrupt normal API calls.
 Resource warnings retain Homey's event data without calling restricted Node.js
 process metrics.
+Native-log coverage verifies that raw responses and device/capability context
+decode without first preparing an export, with no additional network requests.
+The decoder retains events recorded after a history preview and removes duplicates.
 
 The App Store release removes automatic indicator selection and the broad Homey
 API permission previously used for it. Room temperature remains selectable in
@@ -55,6 +58,13 @@ capability information. History survived an app restart, and the JSON decoded
 successfully offline. Resource warnings were captured without a restart or
 restricted process-metric calls. Existing controls, readouts, Boost and the
 Room temperature indicator remained available.
+
+Version 0.5.1 was installed on the same Homey. Read-only inspection of its saved
+journal confirmed fresh raw responses, anonymized identifiers and paired
+capability context without preparing an export. The current session had no
+recorded errors. English and French browser smoke checks passed for the native
+report instructions, collapsed advanced section, preview and clear controls;
+opening the page made no report request.
 
 ## Remaining release testing
 

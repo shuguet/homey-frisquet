@@ -7,8 +7,8 @@ body:
   - type: textarea
     id: report
     attributes:
-      label: Support report
-      description: After reproducing the problem, open Frisquet Connect's app settings and prepare a report. Attach the JSON file here, or provide the Homey app diagnostic-report identifier. Versions and hardware details are collected automatically. If reporting is itself broken, describe that below.
+      label: Homey diagnostic report ID (optional)
+      description: After reproducing the problem, choose Create Diagnostics Report on Homey's Frisquet Connect app page and send it directly to the developer. Paste the report ID here to link this issue to that report. If the button is missing or older history is needed, use Configure → Advanced → Preview saved history and attach the JSON. If reporting is itself broken, describe that below.
   - type: textarea
     id: problem
     attributes:
