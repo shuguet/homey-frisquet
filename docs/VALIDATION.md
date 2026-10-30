@@ -68,6 +68,12 @@ opening the page made no report request.
 
 ## Remaining release testing
 
+Delivery through Homey's native reporting service still needs a store Test
+installation. On 2026-10-30, the store installer returned `build_not_found` for
+the 0.5.1 draft; the verified CLI installation remained running. Version 0.5.0
+was already under certification review. The acceptance procedure is in
+[Publishing](PUBLISHING.md#native-report-acceptance-check).
+
 Physical phone rendering in English and French has not been screenshot-tested.
 Multi-zone and solar hot-water variants are covered by fixtures but still need
 broader hardware testing. Publish-level validation is a schema/build check;
