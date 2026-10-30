@@ -1,0 +1,8 @@
+node_modules/
+.homeybuild/
+.homeycache/
+.env
+env.json
+*.log
+coverage/
+dist/

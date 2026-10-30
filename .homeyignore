@@ -1,0 +1,12 @@
+test/
+scripts/
+docs/
+dist/
+node_modules/
+.git/
+.env
+env.json
+*.log
+coverage/
+.github/
+README.md

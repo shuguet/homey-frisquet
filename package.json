@@ -1,0 +1,27 @@
+{
+  "name": "homey-frisquet",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Native Homey Pro integration for Frisquet Connect",
+  "main": "app.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node scripts/check.js",
+    "validate": "homey app validate",
+    "install:homey": "homey app install",
+    "check:release": "node scripts/check-release.js"
+  },
+  "license": "MIT",
+  "author": "Sylvain Huguet",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shuguet/homey-frisquet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shuguet/homey-frisquet/issues"
+  },
+  "homepage": "https://github.com/shuguet/homey-frisquet"
+}

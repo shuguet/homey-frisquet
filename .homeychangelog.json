@@ -1,0 +1,6 @@
+{
+  "0.4.0": {
+    "en": "Heating and hot water together, with numeric profile temperatures, Boost, equipment information and automatic updates. Added French error messages and refreshed the store presentation. New devices can select Room temperature in their status-indicator settings; existing selections are preserved.",
+    "fr": "Chauffage et eau chaude réunis, avec températures de profil numériques, Boost, informations de l’installation et actualisation automatique. Ajout des messages d’erreur en français et nouvelle présentation. Pour les nouveaux appareils, la température ambiante se choisit dans le réglage de l’indicateur d’état ; les choix existants sont conservés."
+  }
+}

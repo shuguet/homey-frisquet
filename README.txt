@@ -1,0 +1,3 @@
+Keep your home comfortable throughout the day. Adjust your heating and hot water together, give a room a Boost, and let Homey Flows adapt the heating to your routines. Temperatures, boiler status and equipment information update automatically.
+
+Requires Homey Pro with Homey 12.9 or later, a Frisquet boiler connected to a Frisquet Connect box, an existing Frisquet Connect account and internet access. Runs directly on Homey Pro, without a Home Assistant server. This is an unofficial community integration using Frisquet’s cloud service. Weekly schedules and holidays are managed in the official Frisquet app.

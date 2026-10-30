@@ -1,0 +1,3 @@
+Profitez d’une maison confortable tout au long de la journée. Réglez le chauffage et l’eau chaude au même endroit, activez le Boost d’une pièce et adaptez le chauffage à vos habitudes avec les Flows Homey. Les températures, l’état de la chaudière et les informations de l’installation s’actualisent automatiquement.
+
+Nécessite Homey Pro avec Homey 12.9 ou ultérieur, une chaudière Frisquet reliée à une box Frisquet Connect, un compte Frisquet Connect existant et un accès Internet. Fonctionne directement sur Homey Pro, sans serveur Home Assistant. Cette intégration communautaire non officielle utilise le service cloud de Frisquet. Les programmes hebdomadaires et les vacances se règlent dans l’application officielle Frisquet.

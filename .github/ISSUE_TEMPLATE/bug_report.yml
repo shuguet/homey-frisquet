@@ -1,0 +1,31 @@
+name: Bug report
+description: Report a problem with Frisquet Connect for Homey Pro.
+body:
+  - type: markdown
+    attributes:
+      value: Please omit passwords, account tokens, serial numbers, addresses and alert contacts from reports and screenshots.
+  - type: input
+    id: versions
+    attributes:
+      label: App and Homey versions
+      placeholder: App 0.4.0, Homey Pro Early 2023, firmware 12.9.0
+    validations:
+      required: true
+  - type: input
+    id: boiler
+    attributes:
+      label: Boiler model and heating zones
+      placeholder: Hydromotrix, one heating zone
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include steps to reproduce, expected behavior and what the official Frisquet app shows.
+    validations:
+      required: true
+  - type: textarea
+    id: error
+    attributes:
+      label: Displayed error or Last command status

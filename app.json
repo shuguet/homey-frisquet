@@ -1,0 +1,1197 @@
+{
+  "id": "community.frisquet.connect",
+  "version": "0.4.0",
+  "compatibility": ">=12.9.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Frisquet Connect",
+    "fr": "Frisquet Connect"
+  },
+  "description": {
+    "en": "Heating and hot water that fit your day",
+    "fr": "Un chauffage et une eau chaude à votre rythme"
+  },
+  "brandColor": "#28529B",
+  "category": [
+    "climate"
+  ],
+  "tags": {
+    "en": [
+      "Frisquet",
+      "boiler",
+      "heating",
+      "hot water"
+    ],
+    "fr": [
+      "Frisquet",
+      "chaudière",
+      "chauffage",
+      "eau chaude"
+    ]
+  },
+  "permissions": [],
+  "author": {
+    "name": "Sylvain Huguet"
+  },
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "capabilities": {
+    "frisquet_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Heater mode",
+        "fr": "Mode chauffage"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "auto",
+          "title": {
+            "en": "Schedule",
+            "fr": "Programmation"
+          }
+        },
+        {
+          "id": "comfort",
+          "title": {
+            "en": "Comfort always",
+            "fr": "Confort permanent"
+          }
+        },
+        {
+          "id": "reduced",
+          "title": {
+            "en": "Reduced always",
+            "fr": "Réduit permanent"
+          }
+        },
+        {
+          "id": "frost",
+          "title": {
+            "en": "Frost protection",
+            "fr": "Hors gel"
+          }
+        },
+        {
+          "id": "boost",
+          "title": {
+            "en": "Boost",
+            "fr": "Boost"
+          }
+        }
+      ]
+    },
+    "frisquet_water_mode": {
+      "type": "enum",
+      "title": {
+        "en": "Boiler mode",
+        "fr": "Mode chaudière"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        {
+          "id": "unknown",
+          "title": {
+            "en": "Unknown",
+            "fr": "Inconnu"
+          }
+        }
+      ]
+    },
+    "frisquet_profile": {
+      "type": "string",
+      "title": {
+        "en": "Active profile",
+        "fr": "Profil actif"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "frisquet_command_state": {
+      "type": "enum",
+      "title": {
+        "en": "Last command",
+        "fr": "Dernière commande"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "values": [
+        {
+          "id": "idle",
+          "title": {
+            "en": "No command",
+            "fr": "Aucune commande"
+          }
+        },
+        {
+          "id": "pending",
+          "title": {
+            "en": "Pending",
+            "fr": "En attente"
+          }
+        },
+        {
+          "id": "confirmed",
+          "title": {
+            "en": "Confirmed",
+            "fr": "Confirmée"
+          }
+        },
+        {
+          "id": "unconfirmed",
+          "title": {
+            "en": "Unconfirmed",
+            "fr": "Non confirmée"
+          }
+        },
+        {
+          "id": "failed",
+          "title": {
+            "en": "Failed",
+            "fr": "Échec"
+          }
+        }
+      ]
+    },
+    "frisquet_boost": {
+      "type": "boolean",
+      "title": {
+        "en": "Boost",
+        "fr": "Boost"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "toggle",
+      "uiQuickAction": true,
+      "icon": "/assets/icons/boost.svg"
+    },
+    "frisquet_comfort_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Comfort temperature",
+        "fr": "Température Confort"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "units": {
+        "en": "°C",
+        "fr": "°C"
+      },
+      "min": 5,
+      "max": 25,
+      "step": 0.5,
+      "decimals": 1
+    },
+    "frisquet_reduced_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Reduced temperature",
+        "fr": "Température Réduit"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "units": {
+        "en": "°C",
+        "fr": "°C"
+      },
+      "min": 5,
+      "max": 25,
+      "step": 0.5,
+      "decimals": 1
+    },
+    "frisquet_frost_temperature": {
+      "type": "number",
+      "title": {
+        "en": "Frost temperature",
+        "fr": "Température Hors gel"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "units": {
+        "en": "°C",
+        "fr": "°C"
+      },
+      "min": 5,
+      "max": 25,
+      "step": 0.5,
+      "decimals": 1
+    },
+    "frisquet_alarm": {
+      "type": "string",
+      "title": {
+        "en": "Boiler status",
+        "fr": "État de la chaudière"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "frisquet_holiday": {
+      "type": "boolean",
+      "title": {
+        "en": "Holiday mode",
+        "fr": "Mode vacances"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "frisquet_last_update": {
+      "type": "string",
+      "title": {
+        "en": "Last boiler report",
+        "fr": "Dernière remontée chaudière"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor"
+    },
+    "frisquet_model": {
+      "type": "string",
+      "title": {
+        "en": "Boiler model",
+        "fr": "Modèle de chaudière"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_product_range": {
+      "type": "string",
+      "title": {
+        "en": "Product range",
+        "fr": "Gamme"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_product_variant": {
+      "type": "string",
+      "title": {
+        "en": "Equipment variant",
+        "fr": "Version de l’équipement"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_rated_power": {
+      "type": "string",
+      "title": {
+        "en": "Rated power",
+        "fr": "Puissance nominale"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_serial": {
+      "type": "string",
+      "title": {
+        "en": "Boiler serial number",
+        "fr": "Numéro de série chaudière"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_connect_id": {
+      "type": "string",
+      "title": {
+        "en": "Frisquet Connect ID",
+        "fr": "Identifiant Frisquet Connect"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_boiler_clock": {
+      "type": "string",
+      "title": {
+        "en": "Boiler clock",
+        "fr": "Horloge chaudière"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_service_alarms": {
+      "type": "string",
+      "title": {
+        "en": "Service alarms",
+        "fr": "Alarmes de maintenance"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_water_type": {
+      "type": "string",
+      "title": {
+        "en": "Hot-water equipment",
+        "fr": "Équipement eau chaude"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_water_solar": {
+      "type": "string",
+      "title": {
+        "en": "Solar hot water",
+        "fr": "Eau chaude solaire"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_water_equipped": {
+      "type": "string",
+      "title": {
+        "en": "Hot-water equipment present",
+        "fr": "Production d’eau chaude installée"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_installation_name": {
+      "type": "string",
+      "title": {
+        "en": "Installation name",
+        "fr": "Nom de l’installation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_installation_postcode": {
+      "type": "string",
+      "title": {
+        "en": "Installation postcode",
+        "fr": "Code postal de l’installation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_installation_country": {
+      "type": "string",
+      "title": {
+        "en": "Installation country",
+        "fr": "Pays de l’installation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_installation_timezone": {
+      "type": "string",
+      "title": {
+        "en": "Installation time zone",
+        "fr": "Fuseau horaire de l’installation"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_alert_emails": {
+      "type": "string",
+      "title": {
+        "en": "Alert email addresses",
+        "fr": "Adresses e-mail d’alerte"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    },
+    "frisquet_alert_phones": {
+      "type": "string",
+      "title": {
+        "en": "Alert phone numbers",
+        "fr": "Numéros de téléphone d’alerte"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": false
+    }
+  },
+  "drivers": [
+    {
+      "id": "boiler",
+      "name": {
+        "en": "Boiler & heating",
+        "fr": "Chaudière et chauffage"
+      },
+      "class": "boiler",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "measure_temperature",
+        "target_temperature",
+        "frisquet_mode",
+        "frisquet_water_mode",
+        "frisquet_profile",
+        "measure_temperature.applied",
+        "frisquet_boost",
+        "frisquet_comfort_temperature",
+        "frisquet_reduced_temperature",
+        "frisquet_frost_temperature",
+        "alarm_generic",
+        "frisquet_alarm",
+        "frisquet_holiday",
+        "frisquet_last_update",
+        "frisquet_command_state",
+        "frisquet_model",
+        "frisquet_product_range",
+        "frisquet_product_variant",
+        "frisquet_rated_power",
+        "frisquet_serial",
+        "frisquet_connect_id",
+        "frisquet_boiler_clock",
+        "alarm_generic.service",
+        "frisquet_service_alarms",
+        "frisquet_water_type",
+        "frisquet_water_solar",
+        "frisquet_water_equipped",
+        "frisquet_installation_name",
+        "frisquet_installation_postcode",
+        "frisquet_installation_country",
+        "frisquet_installation_timezone",
+        "frisquet_alert_emails",
+        "frisquet_alert_phones",
+        "target_temperature.comfort",
+        "target_temperature.reduced",
+        "target_temperature.frost"
+      ],
+      "capabilitiesOptions": {
+        "measure_temperature.outdoor": {
+          "title": {
+            "en": "Outdoor temperature",
+            "fr": "Température extérieure"
+          }
+        },
+        "target_temperature": {
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "measure_temperature.applied": {
+          "title": {
+            "en": "Applied setpoint",
+            "fr": "Consigne appliquée"
+          },
+          "preventInsights": true
+        },
+        "alarm_generic.service": {
+          "title": {
+            "en": "Service alarm active",
+            "fr": "Alarme de maintenance active"
+          }
+        },
+        "target_temperature.comfort": {
+          "title": {
+            "en": "Comfort temperature",
+            "fr": "Température Confort"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "target_temperature.reduced": {
+          "title": {
+            "en": "Reduced temperature",
+            "fr": "Température Réduit"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "target_temperature.frost": {
+          "title": {
+            "en": "Frost temperature",
+            "fr": "Température Hors gel"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        }
+      },
+      "images": {
+        "small": "/drivers/boiler/assets/images/small.png",
+        "large": "/drivers/boiler/assets/images/large.png",
+        "xlarge": "/drivers/boiler/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Frisquet Connect account",
+              "fr": "Compte Frisquet Connect"
+            },
+            "usernameLabel": {
+              "en": "Email address",
+              "fr": "Adresse e-mail"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "fr": "Mot de passe"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "login"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Frisquet Connect account",
+              "fr": "Compte Frisquet Connect"
+            },
+            "usernameLabel": {
+              "en": "Email address",
+              "fr": "Adresse e-mail"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "fr": "Mot de passe"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ]
+    },
+    {
+      "id": "zone",
+      "name": {
+        "en": "Heating zone",
+        "fr": "Zone de chauffage"
+      },
+      "class": "thermostat",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "capabilities": [
+        "measure_temperature",
+        "target_temperature",
+        "frisquet_mode",
+        "frisquet_profile",
+        "measure_temperature.applied",
+        "frisquet_command_state",
+        "target_temperature.comfort",
+        "target_temperature.reduced",
+        "target_temperature.frost"
+      ],
+      "capabilitiesOptions": {
+        "target_temperature": {
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "measure_temperature.applied": {
+          "title": {
+            "en": "Applied setpoint",
+            "fr": "Consigne appliquée"
+          },
+          "preventInsights": true
+        },
+        "target_temperature.comfort": {
+          "title": {
+            "en": "Comfort temperature",
+            "fr": "Température Confort"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "target_temperature.reduced": {
+          "title": {
+            "en": "Reduced temperature",
+            "fr": "Température Réduit"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        },
+        "target_temperature.frost": {
+          "title": {
+            "en": "Frost temperature",
+            "fr": "Température Hors gel"
+          },
+          "min": 5,
+          "max": 25,
+          "step": 0.5,
+          "decimals": 1
+        }
+      },
+      "images": {
+        "small": "/drivers/zone/assets/images/small.png",
+        "large": "/drivers/zone/assets/images/large.png",
+        "xlarge": "/drivers/zone/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Frisquet Connect account",
+              "fr": "Compte Frisquet Connect"
+            },
+            "usernameLabel": {
+              "en": "Email address",
+              "fr": "Adresse e-mail"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "fr": "Mot de passe"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices",
+            "prev": "login"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login",
+          "template": "login_credentials",
+          "options": {
+            "title": {
+              "en": "Frisquet Connect account",
+              "fr": "Compte Frisquet Connect"
+            },
+            "usernameLabel": {
+              "en": "Email address",
+              "fr": "Adresse e-mail"
+            },
+            "passwordLabel": {
+              "en": "Password",
+              "fr": "Mot de passe"
+            }
+          }
+        },
+        {
+          "id": "done",
+          "template": "done"
+        }
+      ],
+      "deprecated": true
+    }
+  ],
+  "flow": {
+    "actions": [
+      {
+        "id": "set_zone_mode",
+        "title": {
+          "en": "Set heating mode",
+          "fr": "Régler le mode de chauffage"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Set heating mode to [[mode]]",
+          "fr": "[[device]]: Régler le chauffage sur [[mode]]"
+        },
+        "hint": {
+          "en": "Schedule also cancels temporary overrides across the installation. Frost protection keeps the boiler powered.",
+          "fr": "Programmation annule aussi les dérogations temporaires de l’installation. Hors gel conserve la chaudière alimentée."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_mode"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Schedule",
+                  "fr": "Programmation"
+                }
+              },
+              {
+                "id": "comfort",
+                "title": {
+                  "en": "Comfort always",
+                  "fr": "Confort permanent"
+                }
+              },
+              {
+                "id": "reduced",
+                "title": {
+                  "en": "Reduced always",
+                  "fr": "Réduit permanent"
+                }
+              },
+              {
+                "id": "frost",
+                "title": {
+                  "en": "Frost protection",
+                  "fr": "Hors gel"
+                }
+              },
+              {
+                "id": "boost",
+                "title": {
+                  "en": "Boost",
+                  "fr": "Boost"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_profile_temperature",
+        "title": {
+          "en": "Set profile temperature",
+          "fr": "Régler la température d’un profil"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Set [[profile]] to [[temperature]] °C",
+          "fr": "[[device]]: Régler [[profile]] à [[temperature]] °C"
+        },
+        "hint": {
+          "en": "Changes the stored profile temperature, including future scheduled periods. Does not switch the active profile.",
+          "fr": "Modifie la consigne enregistrée, y compris pour les prochaines plages. Ne change pas le profil actif."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_mode"
+          },
+          {
+            "name": "profile",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "comfort",
+                "title": {
+                  "en": "Comfort",
+                  "fr": "Confort"
+                }
+              },
+              {
+                "id": "reduced",
+                "title": {
+                  "en": "Reduced",
+                  "fr": "Réduit"
+                }
+              },
+              {
+                "id": "frost",
+                "title": {
+                  "en": "Frost protection",
+                  "fr": "Hors gel"
+                }
+              }
+            ]
+          },
+          {
+            "name": "temperature",
+            "type": "number",
+            "title": {
+              "en": "Temperature",
+              "fr": "Température"
+            },
+            "min": 5,
+            "max": 25,
+            "step": 0.5
+          }
+        ]
+      },
+      {
+        "id": "set_hot_water_mode",
+        "title": {
+          "en": "Set hot-water mode",
+          "fr": "Régler le mode eau chaude"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Set hot-water mode to [[mode]]",
+          "fr": "[[device]]: Régler l’eau chaude sur [[mode]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_water_mode"
+          },
+          {
+            "name": "mode",
+            "type": "autocomplete",
+            "title": {
+              "en": "Mode",
+              "fr": "Mode"
+            },
+            "placeholder": {
+              "en": "Choose a supported mode",
+              "fr": "Choisir un mode disponible"
+            }
+          }
+        ]
+      },
+      {
+        "id": "set_installation_override",
+        "title": {
+          "en": "Set installation override",
+          "fr": "Régler la dérogation générale"
+        },
+        "titleFormatted": {
+          "en": "Set scheduled zones to [[mode]]",
+          "fr": "Régler les zones programmées sur [[mode]]"
+        },
+        "hint": {
+          "en": "Applies to the installation's scheduled zones until the next programme change. Schedule cancels the override.",
+          "fr": "S’applique aux zones programmées de l’installation jusqu’à la prochaine plage. Programmation annule la dérogation."
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=boiler"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Schedule",
+                  "fr": "Programmation"
+                }
+              },
+              {
+                "id": "comfort",
+                "title": {
+                  "en": "Comfort temporarily",
+                  "fr": "Confort temporaire"
+                }
+              },
+              {
+                "id": "reduced",
+                "title": {
+                  "en": "Reduced temporarily",
+                  "fr": "Réduit temporaire"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "set_boost",
+        "title": {
+          "en": "Set Boost",
+          "fr": "Régler le Boost"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Turn Boost [[enabled]]",
+          "fr": "[[device]]: Régler le Boost sur [[enabled]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_boost"
+          },
+          {
+            "name": "enabled",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "on",
+                "title": {
+                  "en": "On",
+                  "fr": "Activé"
+                }
+              },
+              {
+                "id": "off",
+                "title": {
+                  "en": "Off",
+                  "fr": "Désactivé"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "zone_mode_is",
+        "title": {
+          "en": "Heating mode !{{is|is not}}",
+          "fr": "Le mode de chauffage !{{est|n’est pas}}"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Heating mode !{{is|is not}} [[mode]]",
+          "fr": "[[device]]: Le mode de chauffage !{{est|n’est pas}} [[mode]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_mode"
+          },
+          {
+            "name": "mode",
+            "type": "dropdown",
+            "values": [
+              {
+                "id": "auto",
+                "title": {
+                  "en": "Schedule",
+                  "fr": "Programmation"
+                }
+              },
+              {
+                "id": "comfort",
+                "title": {
+                  "en": "Comfort always",
+                  "fr": "Confort permanent"
+                }
+              },
+              {
+                "id": "reduced",
+                "title": {
+                  "en": "Reduced always",
+                  "fr": "Réduit permanent"
+                }
+              },
+              {
+                "id": "frost",
+                "title": {
+                  "en": "Frost protection",
+                  "fr": "Hors gel"
+                }
+              },
+              {
+                "id": "boost",
+                "title": {
+                  "en": "Boost",
+                  "fr": "Boost"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "boost_is_enabled",
+        "title": {
+          "en": "Boost is enabled",
+          "fr": "Le Boost est activé"
+        },
+        "titleFormatted": {
+          "en": "[[device]]: Boost !{{is|is not}} enabled",
+          "fr": "[[device]]: Le Boost !{{est|n’est pas}} activé"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_boost"
+          }
+        ]
+      }
+    ],
+    "triggers": [
+      {
+        "id": "zone_mode_changed",
+        "title": {
+          "en": "Heating mode changed",
+          "fr": "Le mode de chauffage a changé"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_mode"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "fr": "Mode"
+            }
+          }
+        ],
+        "titleFormatted": {
+          "en": "[[device]] heating mode changed",
+          "fr": "Le mode chauffage de [[device]] a changé"
+        }
+      },
+      {
+        "id": "command_state_changed",
+        "titleFormatted": {
+          "en": "Command status changed for [[device]]",
+          "fr": "L’état de commande a changé pour [[device]]"
+        },
+        "title": {
+          "en": "Command status changed",
+          "fr": "L’état de commande a changé"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_command_state"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "state",
+            "type": "string",
+            "title": {
+              "en": "Status",
+              "fr": "État"
+            }
+          }
+        ]
+      },
+      {
+        "id": "water_mode_changed",
+        "title": {
+          "en": "Boiler mode changed",
+          "fr": "Le mode chaudière a changé"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "capabilities=frisquet_water_mode"
+          }
+        ],
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode ID",
+              "fr": "Identifiant du mode"
+            }
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "fr": "Mode"
+            }
+          }
+        ],
+        "titleFormatted": {
+          "en": "[[device]] boiler mode changed",
+          "fr": "Le mode chaudière de [[device]] a changé"
+        }
+      }
+    ]
+  },
+  "api": {
+    "getDiagnostics": {
+      "method": "GET",
+      "path": "/diagnostics",
+      "public": false
+    }
+  },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Guillaume SOURD"
+      },
+      {
+        "name": "Bruno TÊTE"
+      }
+    ]
+  },
+  "source": "https://github.com/shuguet/homey-frisquet",
+  "bugs": {
+    "url": "https://github.com/shuguet/homey-frisquet/issues"
+  },
+  "support": "https://github.com/shuguet/homey-frisquet/issues",
+  "homepage": "https://github.com/shuguet/homey-frisquet"
+}

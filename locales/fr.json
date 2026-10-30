@@ -1,0 +1,44 @@
+{
+  "errors": {
+    "credentials": "Vérifiez votre e-mail et votre mot de passe Frisquet. Pour un appareil déjà associé, reconnectez-vous avec Réparer dans ses paramètres.",
+    "network": "Impossible de joindre Frisquet Connect. Vérifiez la connexion Internet et réessayez.",
+    "timeout": "Frisquet Connect n’a pas répondu à temps. Vérifiez l’état de l’appareil avant de réessayer.",
+    "rate_limit": "Frisquet Connect limite les demandes. Patientez quelques minutes avant de réessayer.",
+    "service": "Frisquet Connect n’a pas pu traiter la demande.",
+    "response": "Frisquet Connect a renvoyé une réponse inattendue.",
+    "no_sites": "Ce compte Frisquet ne possède aucune installation connectée.",
+    "no_zone": "Cette zone de chauffage n’est plus présente dans l’installation Frisquet.",
+    "no_water": "Cette installation ne propose aucun mode eau chaude pilotable.",
+    "unsupported": "Cette commande n’est pas disponible pour cette installation.",
+    "temperature": "Choisissez une température entre 5 et 25 °C, par pas de 0,5 °C.",
+    "holiday": "Le mode vacances est actif. Désactivez-le dans Frisquet Connect avant de changer le mode chauffage.",
+    "state": "Le profil de chauffage actuel est inconnu. Attendez la prochaine mise à jour automatique ou réglez la température d’un profil précis.",
+    "stopped": "Cet appareil est déconnecté. Rouvrez-le et réessayez."
+  },
+  "status": {
+    "connecting": "Connexion à Frisquet Connect…",
+    "no_alarm": "Aucune alarme"
+  },
+  "devices": {
+    "boiler": "Chaudière et chauffage"
+  },
+  "profiles": {
+    "comfort": "Confort",
+    "reduced": "Réduit",
+    "frost": "Hors gel",
+    "holiday": "Vacances",
+    "comfort_override": "Confort (dérogation)",
+    "reduced_override": "Réduit (dérogation)",
+    "frost_override": "Hors gel (dérogation)"
+  },
+  "information": {
+    "not_reported": "Non renseigné",
+    "yes": "Oui",
+    "no": "Non",
+    "none_configured": "Aucun contact configuré",
+    "without_tank": "Sans ballon de stockage",
+    "with_tank": "Avec ballon de stockage",
+    "no_service_alarms": "Aucune alarme de maintenance",
+    "unspecified_alarm": "Alarme de maintenance (détails indisponibles)"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "errors": {
+    "credentials": "Check your Frisquet email and password. For an existing device, sign in again using Repair in its settings.",
+    "network": "Cannot reach Frisquet Connect. Check the internet connection and try again.",
+    "timeout": "Frisquet Connect did not respond in time. Check the device state before retrying.",
+    "rate_limit": "Frisquet Connect is limiting requests. Wait a few minutes before retrying.",
+    "service": "Frisquet Connect could not complete the request.",
+    "response": "Frisquet Connect returned an unexpected response.",
+    "no_sites": "This Frisquet account has no connected installations.",
+    "no_zone": "This heating zone is no longer present on the Frisquet installation.",
+    "no_water": "This installation does not expose controllable hot-water modes.",
+    "unsupported": "This control is not supported by the installation.",
+    "temperature": "Choose a temperature from 5 to 25 °C in steps of 0.5 °C.",
+    "holiday": "Holiday mode is active. End it in Frisquet Connect before changing the heating mode.",
+    "state": "The current heating profile is unknown. Wait for the next automatic update or choose a specific profile temperature.",
+    "stopped": "This device is disconnected. Reopen the device and try again."
+  },
+  "status": {
+    "connecting": "Connecting to Frisquet Connect…",
+    "no_alarm": "No alarm"
+  },
+  "devices": {
+    "boiler": "Boiler & heating"
+  },
+  "profiles": {
+    "comfort": "Comfort",
+    "reduced": "Reduced",
+    "frost": "Frost protection",
+    "holiday": "Holiday",
+    "comfort_override": "Comfort (temporary)",
+    "reduced_override": "Reduced (temporary)",
+    "frost_override": "Frost protection (temporary)"
+  },
+  "information": {
+    "not_reported": "Not reported",
+    "yes": "Yes",
+    "no": "No",
+    "none_configured": "None configured",
+    "without_tank": "Without storage tank",
+    "with_tank": "With storage tank",
+    "no_service_alarms": "No service alarms",
+    "unspecified_alarm": "Service alarm (details unavailable)"
+  }
+}
