@@ -66,13 +66,20 @@ recorded errors. English and French browser smoke checks passed for the native
 report instructions, collapsed advanced section, preview and clear controls;
 opening the page made no report request.
 
-## Remaining release testing
+## Native report delivery
 
-Delivery through Homey's native reporting service still needs a store Test
-installation. On 2026-10-30, the store installer returned `build_not_found` for
-the 0.5.1 draft; the verified CLI installation remained running. Version 0.5.0
-was already under certification review. The acceptance procedure is in
-[Publishing](PUBLISHING.md#native-report-acceptance-check).
+Verified end to end on 2026-10-30 with version 0.5.1 installed from the store's
+Test channel (`origin: appstore`). A user-submitted native diagnostic report was
+retrieved from Homey's developer service and decoded offline without preparing
+an export first.
+
+The delivered log contained four complete trace records, including a raw Frisquet
+installation response, software versions and paired device/capability context.
+Six identifying fields were anonymized, authentication bodies were omitted and
+no email addresses were present in the decoded trace. No log chunks were missing.
+The private report and its decoded operating data are not stored in this repository.
+
+## Remaining release testing
 
 Physical phone rendering in English and French has not been screenshot-tested.
 Multi-zone and solar hot-water variants are covered by fixtures but still need

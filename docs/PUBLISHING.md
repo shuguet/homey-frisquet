@@ -52,6 +52,9 @@ It is not a Homey Cloud or Homey Bridge integration.
 
 ## Native report acceptance check
 
+This check passed for store Test version 0.5.1 on 2026-10-30. See
+[Validation](VALIDATION.md#native-report-delivery) for the observed result.
+
 After certification makes the Test build available, install it from the store
 without removing existing devices. Confirm its installation origin is `appstore`,
 then reproduce a read-only update or pairing problem and send **Create Diagnostics

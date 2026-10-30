@@ -75,6 +75,9 @@ The decoder accepts text logs or JSON log exports, reassembles compressed chunks
 and reports incomplete records. It reads ordinary trace records without requiring
 a prepared bundle. If a saved-history preview is also present, it merges that
 bundle with the traces, including events after the preview, and removes duplicates.
+It also accepts the JSON returned by Homey's per-build diagnostic-report API,
+including log text in the `stack` field. Native delivery and decoding were
+[verified with store Test version 0.5.1](VALIDATION.md#native-report-delivery).
 
 Compare the raw responses with the failing command and the app version. Use a
 sanitized response as a local regression fixture before adapting a mapping.
