@@ -1,6 +1,6 @@
 # Publishing Frisquet Connect
 
-The release candidate is **0.6.0**, with app ID `community.frisquet.connect`.
+The release candidate is **0.6.1**, with app ID `community.frisquet.connect`.
 The ID and driver IDs remain unchanged so existing devices and Flows can upgrade.
 
 Publisher: Sylvain Huguet. Source and support:
@@ -35,7 +35,7 @@ Frisquet app to compare state and restore any settings changed during testing.
 ## Upload and certification
 
 1. Sign in using `homey login`, then run `homey app publish` in the project root.
-   Keep version 0.6.0 for the first upload of this candidate. English and French
+   Keep version 0.6.1 for the first upload of this candidate. English and French
    release notes are already in `.homeychangelog.json`.
 2. Open [Homey Developer Tools](https://tools.developer.homey.app), choose
    **Apps SDK → My Apps → Frisquet Connect**, and open the uploaded Draft.
@@ -68,6 +68,15 @@ button for that origin. A local capture/decoder check does not verify delivery
 through Homey's reporting service.
 
 ## Notes for the reviewer
+
+The previous submission was approved with feedback that the driver icons were
+front facing. Version 0.6.1 replaces both icons with original device drawings at
+the right-side angle shown in the guidelines: a Visio boiler enclosure and a
+radio satellite for the legacy heating-zone driver. Each uses a transparent
+960 × 960 canvas with 40 px outlines, 20 px details and 10 px minor details.
+The artwork has been checked at small sizes and in white on the app's brand
+colour. This addresses the review feedback; acceptance of the new icons remains
+subject to Athom's review. See [driver icon notes](ICONS.md).
 
 Community integration for Frisquet boilers equipped with Frisquet Connect.
 The app runs directly on Homey Pro using HTTPS and WSS to Frisquet. No companion

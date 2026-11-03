@@ -4,9 +4,11 @@ A native Homey SDK v3 app for Frisquet boilers equipped with a Frisquet Connect
 box. It runs on Homey Pro and talks directly to Frisquet's cloud. No Home Assistant
 instance, Raspberry Pi, container, MQTT broker, or computer left running is needed.
 
-**Version 0.5.1** combines heating and hot water in one device, with Boost as the
-quick action and equipment/installation details in the sensor view. Automated
-checks and live verification are recorded in [docs/VALIDATION.md](docs/VALIDATION.md).
+**Version 0.6.1** updates the boiler and heating-zone icons following App Store
+review feedback. Heating and hot water share one device, with Boost as the quick
+action, app-wide refresh settings and optional connection/alarm notifications.
+Automated checks and live verification are recorded in
+[docs/VALIDATION.md](docs/VALIDATION.md).
 
 ## Requirements
 
@@ -40,7 +42,8 @@ that deletes existing paired devices and their settings.
 
 The Homey CLI supplies the SDK at runtime. The app has no runtime npm dependencies
 and requests no Homey permissions. Its ID is `community.frisquet.connect`.
-This is a release candidate; the App Store version requires Athom certification.
+This update is a release candidate. The previous submission was approved by
+Athom; the new artwork still needs review in the next App Store submission.
 
 Official references: [Homey CLI installation and commands](https://apps.developer.homey.app/the-basics/getting-started/homey-cli),
 [Homey's Node.js 22 runtime](https://apps.developer.homey.app/upgrade-guides/node-22).

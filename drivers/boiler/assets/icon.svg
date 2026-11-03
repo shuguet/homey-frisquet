@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" width="960" height="960"><g fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-50 -50) scale(10.6)"><rect x="22" y="9" width="56" height="73" rx="10" /><path d="M34 82v10m32-10v10M33 66h34" /><path d="M50 24c4 11 15 14 15 24a15 15 0 0 1-30 0c0-7 7-12 7-18 2 5 4 8 6 9 2-4 3-9 2-15Z" /></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Right-side perspective: enclosure silhouette and visible casing depth. -->
+    <path stroke-width="40" d="M320 40 754 80Q790 83 790 121V792Q790 825 755 830L320 880 178 829Q150 819 150 785V143Q150 110 180 98L301 44Q311 40 320 40Z"/>
+    <path stroke-width="20" d="M320 40Q286 53 286 91V832Q286 868 320 880"/>
+    <!-- Visio control panel, display and four physical keys. -->
+    <path stroke-width="20" d="M369 611 679 596Q699 595 699 615V742Q699 761 680 763L369 789Q349 791 349 771V632Q349 612 369 611Z"/>
+    <path stroke-width="20" d="M385 640 663 624V704L385 724Z"/>
+    <g stroke-width="10">
+      <ellipse cx="395" cy="754" rx="10" ry="11"/>
+      <ellipse cx="475" cy="748" rx="10" ry="11"/>
+      <ellipse cx="555" cy="742" rx="10" ry="11"/>
+      <ellipse cx="635" cy="736" rx="10" ry="11"/>
+    </g>
+    <!-- Heating and hot-water connections below the enclosure. -->
+    <path stroke-width="20" d="M375 874V930M515 858V916M655 842V900"/>
+  </g>
+</svg>

@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 960" width="960" height="960"><g fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" transform="translate(-50 -50) scale(10.6)"><path d="M13 45 50 13l37 32M24 37v48h52V37" /><path d="M45 66V43a5 5 0 0 1 10 0v23a10 10 0 1 1-10 0Z" /><path d="M50 51v22" /></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="960" viewBox="0 0 960 960">
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Visio radio satellite viewed at the same right-side angle as the boiler. -->
+    <path stroke-width="40" d="M217 90 856 139Q910 143 910 200V756Q910 809 859 815L217 870 89 826Q50 813 50 769V191Q50 145 91 132L196 94Q206 90 217 90Z"/>
+    <path stroke-width="20" d="M217 90Q174 104 174 154V810Q174 858 217 870"/>
+    <!-- LCD and its circular programme dial; the mode key sits to the right. -->
+    <path stroke-width="20" d="M275 228 740 250V645L275 668Z"/>
+    <ellipse stroke-width="20" cx="508" cy="450" rx="155" ry="159"/>
+    <path stroke-width="20" d="M508 350V450L580 493"/>
+    <path stroke-width="10" d="M508 291V314M508 586V609M353 450H376M640 450H663"/>
+    <ellipse stroke-width="20" cx="825" cy="450" rx="27" ry="29"/>
+    <!-- Information, minus, plus and override keys below the display. -->
+    <g stroke-width="20">
+      <ellipse cx="310" cy="755" rx="27" ry="29"/>
+      <ellipse cx="455" cy="745" rx="27" ry="29"/>
+      <ellipse cx="600" cy="735" rx="27" ry="29"/>
+      <ellipse cx="745" cy="725" rx="27" ry="29"/>
+    </g>
+  </g>
+</svg>

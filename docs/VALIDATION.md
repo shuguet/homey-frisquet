@@ -1,4 +1,29 @@
-# Validation — 0.6.0
+# Validation — 0.6.1
+
+## Driver icon update — 2026-11-03
+
+Checked locally with Node.js 26.12.0 and Homey CLI 4.6.2.
+
+- Replaced both front-facing driver icons with original Visio device drawings
+  using the angle and line weights illustrated in Homey's guidelines.
+- Rendered and visually inspected both icons at 480, 96, 48 and 32 px, including
+  white line work on the app's blue brand colour.
+- Confirmed 960 × 960 SVG dimensions, transparent backgrounds, no embedded
+  images/fonts/gradients/fills and no clipped strokes. Visible bounds are
+  680 × 920 at (130, 20) for the boiler and 900 × 820 at (30, 70) for the satellite.
+- All eight automated test files passed. JavaScript syntax, JSON, release
+  metadata and whitespace checks passed.
+- Homey build and publish-level validation passed.
+- App, package, lockfile and English/French release notes use version 0.6.1.
+
+The review comparison is saved in [driver-icons-preview.png](driver-icons-preview.png).
+Drawing references and design decisions are recorded in [ICONS.md](ICONS.md).
+The previous app submission was approved with icon feedback. Version 0.6.1 has
+not been uploaded or installed on Homey; the new artwork awaits Athom review.
+This update changes artwork and release metadata only. The earlier Node.js 22
+runtime and hardware verification records are retained below.
+
+## Version 0.6.0
 
 Checked on 2026-10-30 with Node.js 22.23.4 and Homey CLI 4.6.2.
 The target runtime is Homey’s Node.js 22 (firmware 12.9.0 or newer).

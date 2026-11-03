@@ -14,5 +14,9 @@
   "0.6.0": {
     "en": "Added app-wide refresh settings and optional notifications for prolonged connection failures, recovery, and new boiler or service alarms. Existing installations keep their five-minute interval; new installations default to fifteen minutes. Notifications are off until enabled.",
     "fr": "Ajout d’un intervalle d’actualisation global et de notifications facultatives pour les pertes de connexion prolongées, leur rétablissement et les nouvelles alarmes chaudière ou de maintenance. Les installations existantes conservent cinq minutes ; les nouvelles utilisent quinze minutes. Les notifications sont désactivées par défaut."
+  },
+  "0.6.1": {
+    "en": "Added app-wide refresh settings and optional notifications for prolonged connection failures, recovery, and new boiler or service alarms. Existing installations keep their five-minute interval; new installations default to fifteen minutes. Notifications are off until enabled. Updated the boiler and heating-zone icons with angled device drawings.",
+    "fr": "Ajout d’un intervalle d’actualisation global et de notifications facultatives pour les pertes de connexion prolongées, leur rétablissement et les nouvelles alarmes chaudière ou de maintenance. Les installations existantes conservent cinq minutes ; les nouvelles utilisent quinze minutes. Les notifications sont désactivées par défaut. Nouvelles icônes de chaudière et de zone de chauffage dessinées en perspective."
   }
 }
