@@ -42,8 +42,8 @@ that deletes existing paired devices and their settings.
 
 The Homey CLI supplies the SDK at runtime. The app has no runtime npm dependencies
 and requests no Homey permissions. Its ID is `community.frisquet.connect`.
-This update is a release candidate. The previous submission was approved by
-Athom; the new artwork still needs review in the next App Store submission.
+Version 0.6.1 is available on the App Store's Test channel and has been submitted
+for certification, with automatic Live publication enabled after approval.
 
 Official references: [Homey CLI installation and commands](https://apps.developer.homey.app/the-basics/getting-started/homey-cli),
 [Homey's Node.js 22 runtime](https://apps.developer.homey.app/upgrade-guides/node-22).

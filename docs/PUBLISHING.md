@@ -1,7 +1,13 @@
 # Publishing Frisquet Connect
 
-The release candidate is **0.6.1**, with app ID `community.frisquet.connect`.
+The current submitted version is **0.6.1**, with app ID `community.frisquet.connect`.
 The ID and driver IDs remain unchanged so existing devices and Flows can upgrade.
+
+Uploaded on 2026-11-03 as [Homey build 5](https://tools.developer.homey.app/apps/app/community.frisquet.connect/build/5),
+released to Test and submitted for certification with automatic Live publication
+enabled. Homey confirmed state `in_review`; version 0.5.1 remains Live pending
+approval. [GitHub Actions](https://github.com/shuguet/homey-frisquet/actions/runs/41617606204)
+passed for the release commit, including Node.js 22/24 tests and Homey validation.
 
 Publisher: Sylvain Huguet. Source and support:
 [shuguet/homey-frisquet](https://github.com/shuguet/homey-frisquet).

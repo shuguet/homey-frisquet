@@ -18,8 +18,13 @@ Checked locally with Node.js 26.12.0 and Homey CLI 4.6.2.
 
 The review comparison is saved in [driver-icons-preview.png](driver-icons-preview.png).
 Drawing references and design decisions are recorded in [ICONS.md](ICONS.md).
-The previous app submission was approved with icon feedback. Version 0.6.1 has
-not been uploaded or installed on Homey; the new artwork awaits Athom review.
+The previous app submission was approved with icon feedback. Version 0.6.1 was
+uploaded as [Homey build 5](https://tools.developer.homey.app/apps/app/community.frisquet.connect/build/5)
+on 2026-11-03, released to Test and submitted for certification with automatic
+Live publication enabled. Homey confirmed `in_review`. No local CLI installation
+was performed. The new artwork awaits Athom review.
+The [release CI run](https://github.com/shuguet/homey-frisquet/actions/runs/41617606204)
+passed all Node.js 22/24 tests, metadata checks, Homey build and publish validation.
 This update changes artwork and release metadata only. The earlier Node.js 22
 runtime and hardware verification records are retained below.
 
